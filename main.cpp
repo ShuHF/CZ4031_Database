@@ -12,5 +12,5 @@ int main()
     cout << "| 6) Retrieve movies 'numVotes' between to 30000 to 40000|" << endl; 
     cout << "| 7) Delete movies 'numVotes' = 1000                     |" << endl;
     cout << "*********************************************************|" << endl;
-    cout <<"Hello world"<<endl;
+   
 }
