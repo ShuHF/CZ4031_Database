@@ -8,7 +8,9 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-I",
+                "C:\\boost_1_77_0"
             ],
             "options": {
                 "cwd": "${fileDirname}"

@@ -19,5 +19,8 @@ int main()
    
    Storage* memStorage = new Storage(100);
    memStorage->readData();
+   memStorage->printContents();
+   //Testing to get diskspace size
+   cout << "SIze: " << memStorage->getDiskCapacitySize() << endl;
    memStorage->freeDisk();
 }

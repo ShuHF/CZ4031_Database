@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <boost/algorithm/string.hpp>
 #include "Storage.h"
 using namespace std;
 
@@ -13,7 +15,7 @@ Storage::Storage(int blockSize) {     // Constructor
 
 int Storage::getDiskCapacitySize()
 {
-  return 0;
+  return sizeof(diskspace);
 }
 
 int Storage::getDatabaseSize()
@@ -31,33 +33,63 @@ int Storage::getBlockSize()
 {
   return blockSize;
 }
-void Storage::readData()
-{
+// void Storage::readData() //for by line -> issue string spilt
+// {
+//   string line;
+//   int count =0;
+//   char character = 0;
+//   char temp;
+//   ifstream filename("C:\\data.tsv");
+//   filename.ignore(10000,'\n');
+  
+//   while (getline (filename, line)) {
+//   // Output the text from the file
+//     vector<string> parts;
+//     split(parts, line, boost::is_any_of("\t"));
+
+//     for(int i=0; i<parts[i].length(); i++){
+//       char char_array[parts[i].length()];
+//       strcpy(char_array, parts[i].c_str());
+//        for (int k = 0; k < parts[i].length(); k++)
+//         diskspace[count]=char_array[k];
+//         count++;
+//     }
+    
+    
+//   }
+//   filename.close();
+// }
+void Storage::readData(){ //read by char -> issue havent ignored the headers
   string myText;
   int count =0;
-  ifstream filename("C:\\data.tsv");
+  unsigned char character=0;
+  string filename("C:\\data.tsv");
 
-//  while (getline (inFile, myText)) {
-//   // Output the text from the file
-//   if (count <){
-//     cout << myText << endl;
-//     count++;
-//   }
-    
-// //   }
-// FILE* input_file = fopen(filename.c_str(), "r");
-//     if (input_file == nullptr) {
-//        return 0;
-//     }
-// while (!feof(filename)) {
-//        character = getc(input_file);
-//        cout << character << "-";
-//     }
+FILE* input_file = fopen(filename.c_str(), "r");
+    if (input_file == nullptr) {
+       cout <<"Failure to read" <<endl;
+    }
+while (!feof(input_file)) {
+       character = getc(input_file);
+       diskspace[count]=character;
+       count++;
+    }
 
 }
 void Storage::freeDisk(){
   free(diskspace);
 }
+void Storage::printContents(){
+  int diskSize = getDiskCapacitySize();
+  int i=0;
+  do{
+      cout << diskspace[i];
+      i++;
+  }while(diskspace[i] != NULL);
+    
+  }
+
+
    
 
     
