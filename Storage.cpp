@@ -1,43 +1,63 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include "Storage.h"
 using namespace std;
 
-class Storage {     // The class
-  public:           // Access specifier
-    int blockSize=100;
-    string disk [100000000];
-    Storage(int blockSize) {     // Constructor
-      blockSize = blockSize;
-    }
-    public: 
+int blockSize=100;
+unsigned char * diskspace= ( unsigned char * )malloc( 100000000 * sizeof( unsigned char ) );
 
-      int getDiskCapacitySize()
-      {
-        return sizeof(disk);
-      }
+Storage::Storage(int blockSize) {     // Constructor
+  blockSize = blockSize;
+}
 
-      int getDatabaseSize()
-      {
-        //Calcaluation added later
-        return getDiskCapacitySize()-blockSize;
-      }
+int Storage::getDiskCapacitySize()
+{
+  return 0;
+}
 
-      void setBlockSize(int block)
-      {
-          blockSize = block;
-      }
+int Storage::getDatabaseSize()
+{
+  //Calcaluation added later
+  return Storage::getDiskCapacitySize()-blockSize;
+}
 
-      int getBlockSize()
-      {
-          return blockSize;
-      }
-      void readData()
-      {
-          
-      }
+void Storage::setBlockSize(int block)
+{
+  Storage::blockSize = block;
+}
 
+int Storage::getBlockSize()
+{
+  return blockSize;
+}
+void Storage::readData()
+{
+  string myText;
+  int count =0;
+  ifstream filename("C:\\data.tsv");
 
-};   
-
+//  while (getline (inFile, myText)) {
+//   // Output the text from the file
+//   if (count <){
+//     cout << myText << endl;
+//     count++;
+//   }
     
+// //   }
+// FILE* input_file = fopen(filename.c_str(), "r");
+//     if (input_file == nullptr) {
+//        return 0;
+//     }
+// while (!feof(filename)) {
+//        character = getc(input_file);
+//        cout << character << "-";
+//     }
+
+}
+void Storage::freeDisk(){
+  free(diskspace);
+}
+   
+
     

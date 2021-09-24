@@ -1,4 +1,8 @@
 #include <iostream>
+
+#include <string>
+
+#include "Storage.cpp"
 using namespace std;
 
 int main()
@@ -13,4 +17,7 @@ int main()
     cout << "| 7) Delete movies 'numVotes' = 1000                     |" << endl;
     cout << "*********************************************************|" << endl;
    
+   Storage* memStorage = new Storage(100);
+   memStorage->readData();
+   memStorage->freeDisk();
 }
