@@ -1,22 +1,28 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+struct movieRatingReview{
+    string movieName;
+    float averageRating;
+    unsigned int numVote;
+    };
 class Storage {     // The class
-  public:           // Access specifier
-    int blockSize;
-    unsigned int capacity;
-    unsigned char * diskspace;
-  public:  
-    Storage(int blockSize);
-    public: 
-
-      int getDiskCapacitySize();
-      int getDatabaseSize();
-      void setBlockSize(int block);
-      int getBlockSize();
-      void readData();
-      void freeDisk();
-      void printContents();
-      int getNumBlock();
-      void calcBlocksUsed();
-};
+  public:
+    
+  private:
+      int blockSize;
+      int disksize;
+      int blockid;
+      int currentblockid;
+      int numberofavaliableblock;
+      int currentblockSize;
+      int totalSpaceUsed;    
+    
+  public: 
+      Storage(int disksize, int blocksize);
+      void storeRecordintoBlock(int recordSize);
+      int avaliableBlockleft();
+      int databasesize();
+      int numBlockUsed();
+     
+   };
