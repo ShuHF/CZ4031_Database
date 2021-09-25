@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <boost//algorithm//string.hpp>
+#include <boost/algorithm/string.hpp>
 #include "Storage.h"
 using namespace std;
 
@@ -27,7 +27,7 @@ int Storage::getDatabaseSize()
 
 void Storage::setBlockSize(int block)
 {
-  Storage::blockSize = block;
+  this->blockSize = block;
 }
 
 int Storage::getBlockSize()
@@ -71,24 +71,24 @@ int Storage::getNumBlock()
 //   }
 //   filename.close();
 // }
-void Storage::readData(){ //read by char -> issue havent ignored the headers
-  string myText;
-  int count =0;
-  unsigned char character=0;
-  string filename("C:\\data.tsv");
+// void Storage::readData(){ //read by char -> issue havent ignored the headers
+//   string myText;
+//   int count =0;
+//   unsigned char character=0;
+//   string filename("C:\\data.tsv");
 
-FILE* input_file = fopen(filename.c_str(), "r");
-    if (input_file == nullptr) {
-       cout <<"Failure to read" <<endl;
-    }
-while (!feof(input_file)) {
-       character = getc(input_file);
-      // if(count>29) //temp solution to ignore headers
-       diskspace[count]=character;
-       count++;
-    }
+// FILE* input_file = fopen(filename.c_str(), "r");
+//     if (input_file == nullptr) {
+//        cout <<"Failure to read" <<endl;
+//     }
+// while (!feof(input_file)) {
+//        character = getc(input_file);
+//       if(count>29) //temp solution to ignore headers
+//        diskspace[count-30]=character;
+//       count++;
+//     }
 
-}
+// }
 
 void Storage::freeDisk(){
   free(diskspace);
@@ -103,16 +103,7 @@ void Storage::printContents(){
       i++;
   }while(i<60);  //change to i < 60 for 3 record showing, last tconstant is tt9916778 -> (diskspace[i] != NULL)
   }
-  void calcBlocksUsed(){
-    int count =0;
-    int i =0;
-    vector <int> recordPerBlock;
-    int reblockSpace=0;
-    do{
-      cout << diskspace[i];
-      i++;
-  }while(i<100); 
-  }
+
   
 
 
