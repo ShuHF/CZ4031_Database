@@ -1,48 +1,65 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
+#include <tuple>
 #include <vector>
-#include <string>
-// #include <boost/algorithm/string.hpp>
 #include "Storage.cpp"
 using namespace std;
 
+
+ std::ostream &operator<< (std::ostream &out, const movieRatingReview& object)
+        {
+            std::cout << "How it appears" << std::endl;
+            out << object.movieName << "\t" << object.averageRating << "\t" << object.numVote << std::endl;
+            return out;
+        }
+
 int main()
 {
-    cout << "*********************************************************|" << endl;
-    cout << "| 1) Check Database size                                 |" << endl;
-    cout << "| 2) Number of block used                                |" << endl;
-    cout << "| 3) Set block size                                      |" << endl;
-    cout << "| 4) Build B+ tree on 'numVote'                          |" << endl;
-    cout << "| 5) Retrieve movies 'numVotes' = 500                    |" << endl;
-    cout << "| 6) Retrieve movies 'numVotes' between to 30000 to 40000|" << endl; 
-    cout << "| 7) Deldete movies 'numVotes' = 1000                     |" << endl;
-    cout << "*********************************************************|" << endl;
-   
-   Storage* memStorage = new Storage(100);
-   string myText;
-   int count =0;
-   int index =0;
-   unsigned char character=0;
+ 
+   movieRatingReview movieReview;
+   vector <movieRatingReview> vectorOfMovies;
    string line;
-   vector<char> v;
-   vector<string> parts;
+   //Read from the data.tsv
    ifstream filename("C:\\data.tsv");
+   //ignore the header
    filename.ignore(10000,'\n');
-  
-   //delimiter by tab 
-    while (getline (filename, line, '\t')) {
-        if(count < 3){
-            cout << index << endl;
-        }
-        else
-        {
-            count = 0;
-        }
+   int count = 0;
+
+   cout << "***************************" << endl;
+    cout << "|    Reading Data          |" << endl;
+    cout << "| 1) Check Database size: " + to_string(databasesize()) + "|" << endl;
+    cout << "| 2) Number of block used  "+ to_string(numBlockUsed()) +" |" << endl;
+    cout << "***************************" << endl;
+
+ 
+
+    //reading the tsv file the while loop is using the default delimiter (\n) line by line
+    while (getline (filename, line)) {
+        stringstream linestream(line);
+        string row;
+        getline(linestream, row, '\t');
+        movieReview.movieName = row;
+        linestream >> movieReview.averageRating >> movieReview.numVote;
+        storeRecordintoBlock(20);
+         cout << "This is the block id" + to_string(currentblockid) << endl;
+         cout << "This is the size of the current block" + to_string(currentblockSize) << endl;
+        //vectorOfMovies.push_back(movieReview);
+        //can take out, experiment
         count++;
-        
+        if (count>=10)
+            break;
+
     }
+
     filename.close();
+    for (size_t i = 0; i < vectorOfMovies.size(); ++i) {
+        //print as seen above, have to overload << operator
+        cout << vectorOfMovies[i];
+        //print only the movienames
+        //cout << vectorOfMovies[i].moviename;
+    }    
    
 
 }
