@@ -2,16 +2,19 @@
 #include <fstream>
 #include <string>
 #include <vector>
-// #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string.hpp>
 #include "Storage.h"
 using namespace std;
 
-int blockSize=100;
+int blockSize=0;
+int memory= 0;
 unsigned char * diskspace;
 
-Storage::Storage(int blockSize) {     // Constructor
+Storage::Storage(int blockSize, int memory) {     // Constructor
   this->blockSize = blockSize;
-  diskspace = ( unsigned char * )malloc( 100000000 * sizeof( unsigned char ) );
+  this->memory = memory;
+  cout << this->memory <<endl;
+  diskspace = ( unsigned char * )malloc( memory * sizeof( unsigned char ) );
 }
 
 int Storage::getDiskCapacitySize()

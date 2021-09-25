@@ -4,10 +4,11 @@ using namespace std;
 class Storage {     // The class
   public:           // Access specifier
     int blockSize;
+    int memory;
     unsigned int capacity;
     unsigned char * diskspace;
   public:  
-    Storage(int blockSize);
+    Storage(int blockSize, int memory);
     public: 
 
       int getDiskCapacitySize();
