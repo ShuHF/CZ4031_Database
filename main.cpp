@@ -22,6 +22,5 @@ int main()
    memStorage->printContents();
    //Testing to get diskspace size
    //cout << "SIze: " << memStorage->getDiskCapacitySize() << endl;
-   cout << "SIze: " << 100000000/memStorage->blockSize << endl;
    memStorage->freeDisk();
 }

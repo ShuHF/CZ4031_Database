@@ -111,7 +111,7 @@ void Storage::printContents(){
     do{
       cout << diskspace[i];
       i++;
-  }while(diskspace[i]!= NULL); 
+  }while(i<100); 
   }
   
 

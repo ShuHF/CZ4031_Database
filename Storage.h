@@ -17,5 +17,6 @@ class Storage {     // The class
       void readData();
       void freeDisk();
       void printContents();
-      void getNumBlock();
+      int getNumBlock();
+      void calcBlocksUsed();
 };
