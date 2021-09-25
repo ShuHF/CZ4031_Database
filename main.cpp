@@ -45,7 +45,7 @@ int main()
         storeRecordintoBlock(20);
          cout << "This is the block id" + to_string(currentblockid) << endl;
          cout << "This is the size of the current block" + to_string(currentblockSize) << endl;
-        //vectorOfMovies.push_back(movieReview);
+        // vectorOfMovies.push_back(movieReview);
         //can take out, experiment
         count++;
         if (count>=10)

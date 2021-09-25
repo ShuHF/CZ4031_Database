@@ -17,7 +17,7 @@ class Storage {     // The class
       int numberofavaliableblock;
       int currentblockSize;
       int totalSpaceUsed;    
-    
+     
   public: 
       Storage(int disksize, int blocksize);
       void storeRecordintoBlock(int recordSize);
