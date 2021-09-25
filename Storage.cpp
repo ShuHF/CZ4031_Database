@@ -2,15 +2,16 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <boost/algorithm/string.hpp>
+#include <boost//algorithm//string.hpp>
 #include "Storage.h"
 using namespace std;
 
 int blockSize=100;
-unsigned char * diskspace= ( unsigned char * )malloc( 100000000 * sizeof( unsigned char ) );
+unsigned char * diskspace;
 
 Storage::Storage(int blockSize) {     // Constructor
-  blockSize = blockSize;
+  this->blockSize = blockSize;
+  diskspace = ( unsigned char * )malloc( 100000000 * sizeof( unsigned char ) );
 }
 
 int Storage::getDiskCapacitySize()
@@ -33,27 +34,38 @@ int Storage::getBlockSize()
 {
   return blockSize;
 }
+int Storage::getNumBlock()
+{
+  return 10000000/this->blockSize;
+}
 // void Storage::readData() //for by line -> issue string spilt
 // {
 //   string line;
 //   int count =0;
 //   char character = 0;
 //   char temp;
+//   vector<char> v;
+//   vector<string> parts;
 //   ifstream filename("C:\\data.tsv");
 //   filename.ignore(10000,'\n');
   
 //   while (getline (filename, line)) {
 //   // Output the text from the file
-//     vector<string> parts;
+    
 //     split(parts, line, boost::is_any_of("\t"));
 
-//     for(int i=0; i<parts[i].length(); i++){
-//       char char_array[parts[i].length()];
-//       strcpy(char_array, parts[i].c_str());
-//        for (int k = 0; k < parts[i].length(); k++)
-//         diskspace[count]=char_array[k];
-//         count++;
+//     for(int i=0; i<parts[i].size(); i++){
+//       // char char_array[parts[i].length()];
+//       // strcpy(char_array, parts[i].c_str());
+//       copy(parts[i].begin(), parts[i].end(), back_inserter(v));
+//        for (int k = 0; k < v.size(); k++){
+//          diskspace[count]=v[k];
+//          count++;
+//        }
+//        v.clear();
+        
 //     }
+//     parts.clear();
     
     
 //   }
@@ -71,23 +83,37 @@ FILE* input_file = fopen(filename.c_str(), "r");
     }
 while (!feof(input_file)) {
        character = getc(input_file);
+      // if(count>29) //temp solution to ignore headers
        diskspace[count]=character;
        count++;
     }
 
 }
+
 void Storage::freeDisk(){
   free(diskspace);
 }
-void Storage::printContents(){
+
+//print all the records in database, Change condition from NULL to any number for content checking
+void Storage::printContents(){ 
   int diskSize = getDiskCapacitySize();
   int i=0;
   do{
       cout << diskspace[i];
       i++;
-  }while(diskspace[i] != NULL);
-    
+  }while(i<60);  //change to i < 60 for 3 record showing, last tconstant is tt9916778 -> (diskspace[i] != NULL)
   }
+  void calcBlocksUsed(){
+    int count =0;
+    int i =0;
+    vector <int> recordPerBlock;
+    int reblockSpace=0;
+    do{
+      cout << diskspace[i];
+      i++;
+  }while(diskspace[i]!= NULL); 
+  }
+  
 
 
    
