@@ -19,6 +19,7 @@ int blockSize=100;
   int numberofavaliableblock = disksize / blockSize;
   int currentblockSize = 0;
   int totalSpaceUsed = 0;
+  
 
 //Constructor to initialize the class
 Storage::Storage(int disksize, int blocksize )
@@ -30,6 +31,7 @@ Storage::Storage(int disksize, int blocksize )
   this->numberofavaliableblock = disksize / blockSize;
   this->currentblockSize = 0;
   this->totalSpaceUsed = 0;
+
 }
 
 /*
