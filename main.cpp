@@ -22,15 +22,18 @@ int main()
     uint8_t *p = new uint8_t [500000000];
     uint8_t *checkPointer;
     int blkPos = 0;
-    size_t len;
     int count = 0;
     int offset = 1;
     int tempCount=1;
+    int logicCount =0;
     int prevBlockID = 0;
 
     movieRatingReview movieReview;
     vector <movieRatingReview> vectorOfMovies;
     vector <tuple <string, void*>> recordsList;
+
+    //Logical adress with all the physical address of block and offset added
+    vector <tuple <uint8_t, tuple <void *, uint8_t>>> mappingTable;
     string line;
 
     //Read from the data.tsv
@@ -92,8 +95,10 @@ int main()
         cout<< "Physical Address" << physicalAddress << endl;
         tuple< string,void *> recordAddress(movieReview.movieName, physicalAddress);
 
-        //Missing logical address input
-
+        //Mapping table input
+        tuple <uint8_t, tuple <void *, uint8_t>> tableEntry(logicCount,blockTable);
+        mappingTable.push_back(tableEntry);
+        logicCount++;
 
         //Inserting the record into the memory space -> needs to checking
         //using len instead of sizeOf
@@ -130,7 +135,12 @@ int main()
     //     //print only the movienames
     //     //cout << vectorOfMovies[i].moviename;
      } 
-      cout << "The size of P: " << sizeof(p)<< endl;   
+      //Mapping table output 
+       for (size_t i = 0; i < mappingTable.size(); ++i) {
+         cout << "The logical ID: " << to_string(get<0>(mappingTable[i]))<< endl; 
+        //cout << "The address: " << get<1>(mappingTable[i])<< endl;
+        cout <<endl;
+       }
    
 
 }
