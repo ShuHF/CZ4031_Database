@@ -105,3 +105,18 @@ int numBlockUsed()
 {
    return currentblockid + 1;
 }
+void delerecord(uint8_t logical_address, vector<tuple <uint8_t, tuple <void *, uint8_t>>> mappingTable, uint8_t offset, int size)
+{
+  for(int i=0;i<mappingTable.size();i++){
+    if(logical_address == get<0>(mappingTable[i]))
+       {
+
+         get<0>(get<1>(mappingTable[i])) = nullptr;
+         currentblockSize -= size;
+         totalSpaceUsed -= size;
+       }
+
+  }
+       
+} 
+

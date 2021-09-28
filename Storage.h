@@ -24,5 +24,6 @@ class Storage {     // The class
       int avaliableBlockleft();
       int databasesize();
       int numBlockUsed();
+      void deleteRecord();
      
    };
