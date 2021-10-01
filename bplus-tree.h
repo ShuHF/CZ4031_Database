@@ -52,9 +52,6 @@ public:
     void remove(int);
     void display(Node *);
     int height(Node *);
-    int getHeight(){
-        return lvls;
-    }
     Node *getRoot(){
         return root;
     };
