@@ -6,6 +6,7 @@
 #include <tuple>
 #include <vector>
 #include "Storage.cpp"
+#include "bplus-tree.h"
 using namespace std;
 
 
@@ -153,6 +154,21 @@ int main()
          cout << "The offset: " << to_string(get<1>(get<1>(mappingTable[i])))<< endl;
          cout <<endl;
         }
+
+    /*** Experiment 2***/
+    //Create Tree
+    BPTree bptree = BPTree();
+    for (size_t i = 0; i < vectorOfMovies.size(); ++i) {
+        bptree.insert(vectorOfMovies[i].numVote);
+    }
+    cout << "***************************" << endl;
+    cout << "|    B+ Tree          |" << endl;
+    cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
+    cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
+    cout << "| 3) Height of Tree  "+ to_string(bptree.getHeight()) +" |" << endl;
+    cout << "| 4) Root node and its child node  " << endl;
+    bptree.display(bptree.getRoot());
+    cout << "***************************" << endl;
    
 
 }
