@@ -7,6 +7,11 @@
 #include <vector>
 #include "Storage.cpp"
 #include "bplus-tree.h"
+#include "bplus-tree-insert.cpp"
+#include "bplus-tree-remove.cpp"
+#include "bplus-tree-search.cpp"
+#include "bplus-tree-display.cpp"
+
 using namespace std;
 
 
@@ -160,12 +165,14 @@ int main()
     BPTree bptree = BPTree();
     for (size_t i = 0; i < vectorOfMovies.size(); ++i) {
         bptree.insert(vectorOfMovies[i].numVote);
+        cout << vectorOfMovies[i].numVote;
+        cout << "" << endl;
     }
     cout << "***************************" << endl;
     cout << "|    B+ Tree          |" << endl;
     cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
-    cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
-    cout << "| 3) Height of Tree  "+ to_string(bptree.getHeight()) +" |" << endl;
+    cout << "| 2) Number of nodes  "+ to_string(numBlockUsed()) +" |" << endl;
+    cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
     cout << "| 4) Root node and its child node  " << endl;
     bptree.display(bptree.getRoot());
     cout << "***************************" << endl;
