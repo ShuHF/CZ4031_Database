@@ -131,7 +131,7 @@ int main()
         
         //can take out, experiment
          count++;
-         if (count>=50)
+         if (count>=60)
              break;
 
     }

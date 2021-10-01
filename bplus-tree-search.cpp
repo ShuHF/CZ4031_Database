@@ -4,7 +4,7 @@
 #include "bplus-tree.h"
 using namespace std;
 
-void BPTree::search(int key){
+Node* BPTree::search(int key){
     // if tree is empty
     if (root == NULL)
         cout << "B+ Tree is empty!\n";
@@ -33,8 +33,9 @@ void BPTree::search(int key){
             if(cursor->keys[i] == key)
             {
                 cout << "Key Found!\n";
-                return;
+                return cursor;
             }
         }
+        return nullptr;
     }
 }
