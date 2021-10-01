@@ -3,14 +3,14 @@
 
 // A node in B+ tree
 class Node {
-    int size; // current number of keys in node
-    bool is_leaf; // whether this node is a leaf node
-    float *keys; // pointer to array of keys in the node
+    int size;               // current number of keys in node
+    bool is_leaf;           // whether this node is a leaf node
+    float *keys;            // pointer to array of keys in the node
     Node** ptr;
     friend class BPTree;
 
 public:
-    Node(int maxKeys)
+    Node(int maxKeys) // Constructor
     {
         keys = new float[maxKeys];
         ptr = new Node*[maxKeys+1];
@@ -43,13 +43,13 @@ class BPTree
     Node *findParent(Node *, Node *);
 
 public:
-    BPTree()
+    BPTree() // Constructor
     {
         root = NULL; // initialize root to NULL
         maxKeys = (blockSize-4) /8;
     }
     void insert(int);
-    void search(int);
+    Node* search(int);
     void remove(int);
     void display(Node *);
     int height(Node *);
