@@ -10,6 +10,7 @@ void BPTree::display(Node *cursor){
         for(int i=0; i<cursor->size;i++){
             cout <<cursor->keys[i]<<" ";
         }
+        numNodes++;
         cout<<"/n";
         if(cursor->is_leaf!=true){ //not leaf
             for(int i=0;i<cursor->size+1;i++){
