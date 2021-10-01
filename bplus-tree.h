@@ -30,8 +30,8 @@ class BPTree
     Node *root;
     void *rootAdd;
     int lvls; // no. of levels in this B+ tree
-    int numNodes;
-    int maxKeys = 3;
+    int numNodes = 0;
+    int maxKeys = 0;
     std::size_t nodeSize; // Size of a node = Size of a block.
 
     //MemoryPool *disk;
@@ -46,6 +46,7 @@ public:
     BPTree()
     {
         root = NULL; // initialize root to NULL
+        maxKeys = (blockSize-4) /8;
     }
     void insert(int);
     void search(int);
