@@ -6,6 +6,7 @@ using namespace std;
 
 Node* BPTree::search(int key){
     // if tree is empty
+    cout << "Finding what key: " << to_string(key) <<endl;
     if (root == NULL)
         cout << "B+ Tree is empty!\n";
     else // else, traverse through the nodes
