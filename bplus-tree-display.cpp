@@ -9,9 +9,9 @@ void BPTree::display(Node *cursor, bool fullTree){
     if(fullTree == false){
         for (int i = 0;i<cursor->size+1 ; i++){
                 if (i!=cursor->size) {
-                    cout << 0 << " " << cursor->keys[i].value << "\n";
+                    cout << "Root:" << " " << cursor->keys[i].value << "\n";
                 }
-                cout << 1 << "\n";
+                //cout << 1 << "\n";
                 for (int j = 0; j<cursor->ptr[i]->size; j++){
                     cout << cursor->ptr[i]->keys[j].value << " ";
                 }
