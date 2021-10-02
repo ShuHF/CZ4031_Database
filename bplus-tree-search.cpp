@@ -4,7 +4,7 @@
 #include "bplus-tree.h"
 using namespace std;
 
-Node* BPTree::search(int key, bool flag){
+Node* BPTree::search(int key, bool flag, bool rangeflag, int key2){
     // if tree is empty
     if (root == NULL)
         cout << "B+ Tree is empty!\n";
@@ -29,30 +29,57 @@ Node* BPTree::search(int key, bool flag){
             }
         }
         // traverse to find node with key
+        int sumDataBlock = 0;
+        int counter = 0;
+        float avgTotalAvgRating = 0;
         for(int i=0; i< cursor->size; i++){
-            if(cursor->keys[i].value == key)
-            {
-                if(flag == true)
+           if(rangeflag == false)
+           {
+                if(cursor->keys[i].value == key)
                 {
-                    cout << to_string(cursor->keys[i].value) +  " Found!\n";
-                    for (int j = 0; j < cursor->keys[i].add_vect.size(); ++j) {
-                            printf("Data Block: ");
-                            printf("%p", (char *) cursor->keys[i].add_vect[j]);
-                            printf("\n");
-                            printf("Movie Name: ");
-                            cout << (*(movieRatingReview *) cursor->keys[i].add_vect[j]).movieName << "\n";
+                    if(flag == true)
+                    {
+                        cout << to_string(cursor->keys[i].value) +  " Found!\n";
+                        for (int j = 0; j < cursor->keys[i].add_vect.size(); ++j) {
+                            if(counter <= 4)
+                            {
+                                    printf("\n");
+                                    printf("tconst: ");
+                                    cout << (*(movieRatingReview *) cursor->keys[i].add_vect[j]).movieName << "\n";
+                            }
+                            avgTotalAvgRating += (*(movieRatingReview *) cursor->keys[i].add_vect[j]).averageRating;
+                            counter++;
+                            sumDataBlock++;
+                        }
+                        cout << to_string((avgTotalAvgRating/sumDataBlock)) <<endl;
+                        cout << to_string(sumDataBlock) << endl;
+                        cout << to_string(cursor->keys[i].add_vect.size())<<endl;
                     }
-                }
                 
-
-                /*cout <<"Size: "<< cursor->keys[i].add_vect.size() << "\n";
-                printf("No. of Data Blocks: %d", cursor->keys[i].add_vect.size());
-                printf("\n");*/
-
-               
-
-                return cursor;
-            }
+                    return cursor;
+                }
+           }
+           //Only for range searching
+           else if(rangeflag == true && flag == true)
+           {
+               if (cursor->keys[i].value >= key && cursor->keys[i].value <= key2)
+               {
+                        for (int j = 0; j < cursor->keys[i].add_vect.size(); ++j) {
+                            if(counter <= 4)
+                            {
+                                    printf("\n");
+                                    printf("tconst: ");
+                                    cout << (*(movieRatingReview *) cursor->keys[i].add_vect[j]).movieName << "\n";
+                            }
+                            avgTotalAvgRating += (*(movieRatingReview *) cursor->keys[i].add_vect[j]).averageRating;
+                            counter++;
+                            sumDataBlock++;
+                        }
+               }
+                cout << to_string((avgTotalAvgRating/sumDataBlock)) <<endl;
+                cout << to_string(sumDataBlock) << endl;
+                cout << to_string(cursor->keys[i].add_vect.size())<<endl;
+           }
         }
         
     }
