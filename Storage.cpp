@@ -13,7 +13,7 @@ using namespace std;
  * currentblockSize = get the current block size that is using
  * totalSpaceUsed = total space used up by the record*/
 int blockSize=100;
-  int disksize = 100000000;
+  int disksize = 500000000;
   int blockid = 0;
   int currentblockid = 0;
   int numberofavaliableblock = disksize / blockSize;
