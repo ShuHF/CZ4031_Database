@@ -4,7 +4,7 @@
 #include "bplus-tree.h"
 using namespace std;
 
-Node* BPTree::search(int key){
+Node* BPTree::search(int key, bool flag){
     // if tree is empty
     if (root == NULL)
         cout << "B+ Tree is empty!\n";
@@ -32,19 +32,24 @@ Node* BPTree::search(int key){
         for(int i=0; i< cursor->size; i++){
             if(cursor->keys[i].value == key)
             {
-                cout << to_string(cursor->keys[i].value) +  " Found!\n";
-
-                /*cout <<"Size: "<< cursor->keys[i].add_vect.size() << "\n";
-                printf("No. of Data Blocks: %d", cursor->keys[i].add_vect.size());
-                printf("\n");
-
-                for (int j = 0; j < cursor->keys[i].add_vect.size(); ++j) {
+                if(flag == true)
+                {
+                    cout << to_string(cursor->keys[i].value) +  " Found!\n";
+                    for (int j = 0; j < cursor->keys[i].add_vect.size(); ++j) {
                             printf("Data Block: ");
                             printf("%p", (char *) cursor->keys[i].add_vect[j]);
                             printf("\n");
                             printf("Movie Name: ");
                             cout << (*(movieRatingReview *) cursor->keys[i].add_vect[j]).movieName << "\n";
-                        }*/
+                    }
+                }
+                
+
+                /*cout <<"Size: "<< cursor->keys[i].add_vect.size() << "\n";
+                printf("No. of Data Blocks: %d", cursor->keys[i].add_vect.size());
+                printf("\n");*/
+
+               
 
                 return cursor;
             }
