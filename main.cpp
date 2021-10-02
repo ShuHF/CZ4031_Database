@@ -117,6 +117,9 @@ int main()
        
         tempCount++;
                //can take out, experiment
+        count++;
+         if (count>=60)
+             break;
         
 
     }
@@ -159,24 +162,36 @@ int main()
         bptree.insert(record);
     }
 
-    
-
-    // cout << "***************************" << endl;
-    // cout << "|    B+ Tree               |" << endl;
-    // cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
-    // cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
-    // cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
-    // cout << "| 4) Root node and its child node  " << endl;
-    // bptree.display(bptree.getRoot());
-    // cout << "***************************" << endl;
+    cout << "        Experiment 2"        << endl;
+    cout << "***************************" << endl;
+    cout << "|    B+ Tree               |" << endl;
+    cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
+    cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
+    cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
+    cout << "| 4) Root node and its child node  " << endl;
+    bptree.display(bptree.getRoot(), false); // if false, print only the root and first node
+    cout << "***************************" << endl;
     
     //Experiement 3 #500 numVote
-    //bptree.search(500, true, false, 0);
+    bptree.search(500, true, false, 0);
     
     //Experiment 4 between 30,000 to 40,000
     bptree.search(30000, true, true, 40000);
 
 
+    // Experiment 5 (delete numVotes == 1000)
+    key_record recordToDelete;
+    recordToDelete.value = 1000;
+    recordToDelete.add_vect.push_back((char *) nullptr );
+    bptree.remove(recordToDelete);
+
+    cout << "        Experiment 5       " << endl;
+    cout << "***************************" << endl;
+    cout << "| 1) Number of times a node is deleted or when two nodes merged: "  << endl; //TODO
+    cout << "| 2) Number of nodes of updated B+ Tree: " + to_string(bptree.getnumNodes()) + "|" << endl;
+    cout << "| 3) Height of updated B+ Tree: " + to_string(bptree.height(bptree.getRoot())) + "|" << endl;
+    cout << "| 4) Content of Root node and its first child nodes of updated B+ Tree: " << endl;
+    bptree.display(bptree.getRoot(), false);
 
 
 
