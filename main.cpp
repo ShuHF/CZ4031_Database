@@ -64,7 +64,8 @@ int main()
         getline(linestream, row, '\t');
         strcpy(movieReview.movieName, row.c_str());
         linestream >> movieReview.averageRating >> movieReview.numVote;
-        storeRecordintoBlock(sizeof(movieReview));
+        int currentid = storeRecordintoBlock(sizeof(movieReview));
+        // cout << "Size of movie record "<< to_string(sizeof(movieReview)) << endl;
          //cout << "This is the block id: " + to_string(currentblockid) << endl;
          //cout << "This is the size of the current block: " + to_string(currentblockSize) << endl;
     
@@ -72,12 +73,12 @@ int main()
         
 
         //check if block id has changed to determine offset per block address
-        if(currentblockid != prevBlockID){
+        if(currentid != prevBlockID){
             offset = 0;
             prev = sizeof(movieReview);
             tempCount=0;
             newoffset = 0;
-            prevBlockID=currentblockid;
+            prevBlockID=currentid;
         }
         else
         {
@@ -85,19 +86,17 @@ int main()
             {
                 offset = 0;
                 prev = sizeof(movieReview);
-                prevBlockSize = currentblockSize;
             }
             else
             { //double check offset
                     offset += prev;
-                    prevBlockSize = currentblockSize;
                 
             }
         }
       
         //blkPos increments accordingly to the current block
         //Offset starts at 0 ->need confirming
-        blkPos = (currentblockid*blockSize);
+        blkPos = (currentid*blockSize);
 
         blkPointer = (unsigned char *)disk + blkPos;
         tuple<void *, unsigned char> blockTable(&blkPointer,offset);

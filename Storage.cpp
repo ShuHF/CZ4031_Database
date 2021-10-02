@@ -12,7 +12,7 @@ using namespace std;
  * numberofavaliableblock = find out how many block can be created based on the disksize
  * currentblockSize = get the current block size that is using
  * totalSpaceUsed = total space used up by the record*/
-int blockSize=100;
+  int blockSize=100;
   int disksize = 500000000;
   int blockid = 0;
   int currentblockid = 0;
@@ -25,7 +25,7 @@ int blockSize=100;
 Storage::Storage(int disksize, int blocksize )
 {
   this->blockSize=100;
-  this->disksize = 100000000;
+  this->disksize = 500000000;
   this->blockid = 0;
   this->currentblockid = 0;
   this->numberofavaliableblock = disksize / blockSize;
@@ -35,15 +35,14 @@ Storage::Storage(int disksize, int blocksize )
 }
 
 /*
- *This function is used to figure out how to store the record in the diskplace based on the 4 scenario
+ *This function is used to figure out which block id to store the record into 
  *1. Reject if the record is bigger then the blocksize specified
  *2. Reject if there is no more avaliable block size
  *3. Add the record into a new block if the record cant fit in the current block
  *4. Add the record into current block 
- *
- * According to the lecture to refer to a record required address, block id
+ * Return the block id
  **/
-void storeRecordintoBlock(int recordSize)
+int storeRecordintoBlock(int recordSize)
 {
   if(recordSize == 0)
   {
@@ -64,22 +63,18 @@ void storeRecordintoBlock(int recordSize)
   {
     //Change to new block 
     currentblockid ++;
-    /*
-    * CODES HERE TO STORE IT
-    */
     numberofavaliableblock --;
     currentblockSize = 0;
     currentblockSize += recordSize;
+  
   }
  //Scenario 4 ample space to fit the record in the current block without exceeding the block size specified 
  else
  {
-   /**
-    * CODES HERE TO STORE IT INTO THE BLOCK
-    * */
    currentblockSize += recordSize;
  }
  totalSpaceUsed += recordSize;
+ return currentblockid;
 }
 
 /* 
