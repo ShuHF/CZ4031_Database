@@ -64,7 +64,6 @@ int main()
         getline(linestream, row, '\t');
         strcpy(movieReview.movieName, row.c_str());
         linestream >> movieReview.averageRating >> movieReview.numVote;
-        int recordLength = 10 + to_string(movieReview.averageRating).length() + to_string(movieReview.numVote).length();
         storeRecordintoBlock(sizeof(movieReview));
          //cout << "This is the block id: " + to_string(currentblockid) << endl;
          //cout << "This is the size of the current block: " + to_string(currentblockSize) << endl;
@@ -120,11 +119,11 @@ int main()
         tempCount++;
         
         //can take out, experiment
-        // count++;
-        //   if (count>60){
-        //        physicalAddress = NULL;
-        //         break;
-        //   }
+         count++;
+           if (count>60){
+                physicalAddress = NULL;
+                 break;
+           }
               
 
     }
@@ -164,6 +163,7 @@ int main()
     cout << "| 4) Root node and its child node  " << endl;
     bptree.display(bptree.getRoot());
     cout << "***************************" << endl;
+    bptree.search(51);
 
     disk = NULL;
     blkPointer = nullptr;
