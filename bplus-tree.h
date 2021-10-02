@@ -47,7 +47,7 @@ public:
     BPTree() // Constructor
     {
         root = NULL; // initialize root to NULL
-        maxKeys = 3;
+        maxKeys = (blockSize - 4) / 8;
     }
     void insert(int);
     Node* search(int);
