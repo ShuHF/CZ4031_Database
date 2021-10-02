@@ -64,8 +64,8 @@ int main()
         getline(linestream, row, '\t');
         strcpy(movieReview.movieName, row.c_str());
         linestream >> movieReview.averageRating >> movieReview.numVote;
-        int recordLength = 10 + to_string(movieReview.averageRating).length() + to_string(movieReview.numVote).length();
-        storeRecordintoBlock(sizeof(movieReview));
+        int currentid = storeRecordintoBlock(sizeof(movieReview));
+        // cout << "Size of movie record "<< to_string(sizeof(movieReview)) << endl;
          //cout << "This is the block id: " + to_string(currentblockid) << endl;
          //cout << "This is the size of the current block: " + to_string(currentblockSize) << endl;
     
@@ -73,12 +73,12 @@ int main()
         
 
         //check if block id has changed to determine offset per block address
-        if(currentblockid != prevBlockID){
+        if(currentid != prevBlockID){
             offset = 0;
             prev = sizeof(movieReview);
             tempCount=0;
             newoffset = 0;
-            prevBlockID=currentblockid;
+            prevBlockID=currentid;
         }
         else
         {
@@ -86,19 +86,17 @@ int main()
             {
                 offset = 0;
                 prev = sizeof(movieReview);
-                prevBlockSize = currentblockSize;
             }
             else
             { //double check offset
                     offset += prev;
-                    prevBlockSize = currentblockSize;
                 
             }
         }
       
         //blkPos increments accordingly to the current block
         //Offset starts at 0 ->need confirming
-        blkPos = (currentblockid*blockSize);
+        blkPos = (currentid*blockSize);
 
         blkPointer = (unsigned char *)disk + blkPos;
         tuple<void *, unsigned char> blockTable(&blkPointer,offset);
@@ -118,6 +116,7 @@ int main()
         memcpy(physicalAddress, &movieReview,sizeof(movieReview));
        
         tempCount++;
+<<<<<<< HEAD
         
         //can take out, experiment
         // count++;
@@ -126,13 +125,18 @@ int main()
                  break;
           }
               
+=======
+               //can take out, experiment
+         count++;
+        if (count>60)
+        {
+            physicalAddress = NULL;
+            break;
+        }
+>>>>>>> origin
 
     }
-      cout << "***************************" << endl;
-    cout << "|    Reading Data          |" << endl;
-    cout << "| 1) Check Database size: " + to_string(databasesize()) + "|" << endl;
-    cout << "| 2) Number of block used  "+ to_string(numBlockUsed()) +" |" << endl;
-    cout << "***************************" << endl;
+   
 
 
     filename.close();
@@ -144,8 +148,19 @@ int main()
         //        void *blockAddress = get<1>(* iterator);
         //        cout << "Record: " << ((*(movieRatingReview *) blockAddress).movieName) <<  "\t" << to_string((*(movieRatingReview*) blockAddress).averageRating) << "\t" << to_string((*(movieRatingReview *) blockAddress).numVote) << "\t at " << blockAddress << '\n';
         //    }
-        
-        
+
+    //Experiment 1/
+    cout << "***************************" << endl;
+    cout << "| After reading Data          |" << endl;
+    cout << "| -------------------         |" << endl;
+    cout << "| 1) Fixed block size: " + to_string(blockSize) + "|" << endl;
+    cout << "| 2) Check Database size: " + to_string(databasesize()) + "|" << endl;
+    cout << "| 3) Num of avaliable block: " + to_string(avaliableBlockleft()) + "|" << endl;
+    cout << "| 4) Number of block used  "+ to_string(numBlockUsed()) +" |" << endl;
+    cout << "***************************" << endl;    
+
+    cout << "completed" <<endl;
+
     /*** Experiment 2***/
     //Create Tree
     BPTree bptree = BPTree();
@@ -169,6 +184,9 @@ int main()
     cout << "| 4) Root node and its child node  " << endl;
     bptree.display(bptree.getRoot());
     cout << "***************************" << endl;
+    
+    //Experiement 3
+    // bptree.search(51);
 
     bptree.search(15);
     
