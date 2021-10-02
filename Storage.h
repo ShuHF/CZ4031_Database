@@ -2,7 +2,7 @@
 #include <fstream>
 using namespace std;
 struct movieRatingReview{
-    string movieName;
+    char movieName [10];
     float averageRating;
     unsigned int numVote;
     };
