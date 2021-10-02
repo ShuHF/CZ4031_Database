@@ -13,6 +13,7 @@ void BPTree::insert(int x)
             root->keys[0] = x;
             root->is_leaf = true;
             root->size = 1;
+            numNodes++;
         }
         // else, traverse the nodes to insert
         else
@@ -54,6 +55,7 @@ void BPTree::insert(int x)
             else // else need to split nodes
             {
                 Node* newLeaf = new Node(maxKeys);
+                numNodes++;
                 int virtualNode[maxKeys+1];
 
                 // copy keys to virtualNode
@@ -89,6 +91,7 @@ void BPTree::insert(int x)
                 if(cursor == root)
                 {
                     Node* newRoot = new Node(maxKeys);
+                    numNodes++;
                     newRoot->keys[0] = newLeaf->keys[0];
                     newRoot->ptr[0] = cursor;
                     newRoot->ptr[1] = newLeaf;
@@ -309,6 +312,7 @@ void BPTree::insertInternal(int key, Node *cursor, Node *child){
     }
     else{ // if full, split internal node and create new internal node
         Node *newInt = new Node(maxKeys);
+        numNodes++;
 
         // copy keys and pointers into the virtual lists
         float virtualKey[maxKeys + 1];
@@ -349,7 +353,8 @@ void BPTree::insertInternal(int key, Node *cursor, Node *child){
 
         // if current cursor = root, create a new root
         if(cursor == root){
-            Node *newRoot = new Node(maxKeys); ///TODO maxKeys
+            Node *newRoot = new Node(maxKeys); 
+            numNodes++;
             newRoot->keys[0] = cursor->keys[cursor->size];
             newRoot->ptr[0] = cursor;
             newRoot->ptr[1] = newInt;

@@ -32,10 +32,11 @@ Node* BPTree::search(int key){
         for(int i=0; i< cursor->size; i++){
             if(cursor->keys[i] == key)
             {
-                cout << "Key Found!\n";
+                cout << to_string(cursor->keys[i]) +  " Found!\n";
                 return cursor;
             }
         }
-        return nullptr;
+        
     }
+    return nullptr;
 }

@@ -159,7 +159,7 @@ int main()
     cout << "***************************" << endl;
     cout << "|    B+ Tree               |" << endl;
     cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
-    cout << "| 2) Number of nodes  "+ to_string(numBlockUsed()) +" |" << endl;
+    cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
     cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
     cout << "| 4) Root node and its child node  " << endl;
     bptree.display(bptree.getRoot());
