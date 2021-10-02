@@ -160,6 +160,7 @@ int main()
         float numVotes = (*(movieRatingReview *) blockAddress).numVote;
         key_record record;
         record.value = numVotes;
+        record.add_vect.push_back(blockAddress);
         bptree.insert(record);
     }
 
