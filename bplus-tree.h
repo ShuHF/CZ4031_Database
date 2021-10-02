@@ -48,7 +48,7 @@ public:
         maxKeys = (blockSize - 4) / 8;
     }
     void insert(key_record);
-    Node* search(int);
+    Node* search(int, bool);
     void remove(key_record);
     void display(Node *);
     int height(Node *);
