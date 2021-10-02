@@ -16,7 +16,7 @@ Node* BPTree::search(int key){
         while(cursor->is_leaf == false)
         {
             for(int i=0; i < cursor->size; i++){
-                if(key < cursor->keys[i])
+                if(key < cursor->keys[i].value)
                 {
                     cursor = cursor->ptr[i];
                     break;
@@ -30,9 +30,22 @@ Node* BPTree::search(int key){
         }
         // traverse to find node with key
         for(int i=0; i< cursor->size; i++){
-            if(cursor->keys[i] == key)
+            if(cursor->keys[i].value == key)
             {
-                cout << to_string(cursor->keys[i]) +  " Found!\n";
+                cout << to_string(cursor->keys[i].value) +  " Found!\n";
+
+                /*cout <<"Size: "<< cursor->keys[i].add_vect.size() << "\n";
+                printf("No. of Data Blocks: %d", cursor->keys[i].add_vect.size());
+                printf("\n");
+
+                for (int j = 0; j < cursor->keys[i].add_vect.size(); ++j) {
+                            printf("Data Block: ");
+                            printf("%p", (char *) cursor->keys[i].add_vect[j]);
+                            printf("\n");
+                            printf("Movie Name: ");
+                            cout << (*(movieRatingReview *) cursor->keys[i].add_vect[j]).movieName << "\n";
+                        }*/
+
                 return cursor;
             }
         }
