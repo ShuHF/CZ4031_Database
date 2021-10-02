@@ -30,6 +30,6 @@ int BPTree::height(Node *cursor){
             return 1;
         }
         else{
-            return NULL;
+            return 0;
         }
 }

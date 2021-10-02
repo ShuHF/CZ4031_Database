@@ -119,6 +119,8 @@ void BPTree::remove(int x) {
             cursor->size += rightNode->size;
             cursor->ptr[cursor->size] = rightNode->ptr[rightNode->size];
             cout << "Merging two leaf nodes\n";
+            numNodes--;
+            numTimesDeleted++;
             removeInternal(parent->keys[right - 1], parent, rightNode);
             delete[] rightNode->keys;
             delete[] rightNode->ptr;

@@ -68,8 +68,8 @@ int main()
         linestream >> movieReview.averageRating >> movieReview.numVote;
         int recordLength = movieReview.movieName.length()+ to_string(movieReview.averageRating).length() + to_string(movieReview.numVote).length();
         storeRecordintoBlock(recordLength);
-         cout << "This is the block id: " + to_string(currentblockid) << endl;
-         cout << "This is the size of the current block: " + to_string(currentblockSize) << endl;
+         /*cout << "This is the block id: " + to_string(currentblockid) << endl;
+         cout << "This is the size of the current block: " + to_string(currentblockSize) << endl;*/
     
         vectorOfMovies.push_back(movieReview);
         
@@ -101,8 +101,8 @@ int main()
         blkPos = (currentblockid*blockSize);
         //cout<<"Block position: "<< to_string(blkPos) << endl;
         tuple<void *, uint8_t> blockTable(&p+blkPos,offset);
-        cout<< "Block Address: " << get<0>(blockTable) << endl;
-        cout<< "Offset: " << to_string(get<1>(blockTable)) << endl;
+        //cout<< "Block Address: " << get<0>(blockTable) << endl;
+        //cout<< "Offset: " << to_string(get<1>(blockTable)) << endl;
 
         //Add the offset to the physical address 
         void *physicalAddress = (unsigned char *)get<0>(blockTable) + get<1>(blockTable);
@@ -110,7 +110,7 @@ int main()
         // cout << "Block 1: " << to_string(get<1>(blockTable)) << endl;
 
         //Create a tuple to store the current movie review id and physical address
-        cout<< "Physical Address" << physicalAddress << endl;
+        //cout<< "Physical Address" << physicalAddress << endl;
         tuple< string,void *> recordAddress(movieReview.movieName, physicalAddress);
 
         //Mapping table input
@@ -153,12 +153,12 @@ int main()
     //     //cout << vectorOfMovies[i].moviename;
     // } 
       //Mapping table output 
-        for (size_t i = 0; i < mappingTable.size(); ++i) {
+        /*for (size_t i = 0; i < mappingTable.size(); ++i) {
           cout << "The logical ID: " << to_string(get<0>(mappingTable[i]))<< endl; 
          cout << "The address: " << get<0>(get<1>(mappingTable[i]))<< endl;
          cout << "The offset: " << to_string(get<1>(get<1>(mappingTable[i])))<< endl;
          cout <<endl;
-        }
+        }*/
 
     /*** Experiment 2***/
     //Create Tree
@@ -175,10 +175,20 @@ int main()
     bptree.display(bptree.getRoot());
     cout << "***************************" << endl;
 
-    for(int i = 10; i< 20; i++)
-    {
-        bptree.search(i);
+    while(bptree.search(15) != nullptr){ // remove all 1000
+        bptree.remove(15);
     }
-   
+    while(bptree.search(128) != nullptr){ // remove all 1000
+        bptree.remove(128);
+    }
+    while(bptree.search(16) != nullptr){ // remove all 1000
+        bptree.remove(16);
+    }
+
+
+    bptree.display(bptree.getRoot());
+
+    cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
+    cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
 
 }
