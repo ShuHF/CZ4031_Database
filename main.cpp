@@ -52,7 +52,7 @@ int main()
     string line;
 
     //Read from the data.tsv
-    ifstream filename("Data\data.tsv");
+    ifstream filename("Data/data.tsv");
     //ignore the header
     filename.ignore(10000,'\n');
 
