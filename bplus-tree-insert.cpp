@@ -21,7 +21,19 @@ void BPTree::insert(key_record x)
             Node* cursor = root;
             Node* parent; // keep track of parent
 
-            
+            Node* searchRes;
+            searchRes = search(x.value);
+            if ( searchRes != nullptr){
+                for(int i = 0; i < searchRes->size; i++)
+                {
+                    if(searchRes->keys[i].value == x.value)
+                    {
+                        searchRes->keys[i].add_vect.push_back(x.add_vect[0]);
+                        break;
+                    }
+                }
+                return;
+            }
 
             while(cursor->is_leaf == false) // not leaf node
             {
