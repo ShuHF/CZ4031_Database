@@ -116,16 +116,6 @@ int main()
         memcpy(physicalAddress, &movieReview,sizeof(movieReview));
        
         tempCount++;
-<<<<<<< HEAD
-        
-        //can take out, experiment
-        // count++;
-           if (count>20){
-                physicalAddress = NULL;
-                 break;
-          }
-              
-=======
                //can take out, experiment
          count++;
         if (count>60)
@@ -133,7 +123,6 @@ int main()
             physicalAddress = NULL;
             break;
         }
->>>>>>> origin
 
     }
    
@@ -171,6 +160,7 @@ int main()
         float numVotes = (*(movieRatingReview *) blockAddress).numVote;
         key_record record;
         record.value = numVotes;
+        record.add_vect.push_back(blockAddress);
         bptree.insert(record);
     }
 
