@@ -50,7 +50,7 @@ public:
     void insert(key_record);
     Node* search(int, bool);
     void remove(key_record);
-    void display(Node *);
+    void display(Node *, bool);
     int height(Node *);
     Node *getRoot(){
         return root;

@@ -4,21 +4,37 @@
 #include "bplus-tree.h"
 using namespace std;
 
-void BPTree::display(Node *cursor){
-    //check if cursor is not null, print out the value of the key.
-    if(cursor!=NULL){
-        for(int i=0; i<cursor->size;i++){
-            cout <<cursor->keys[i].value<<" ";
-        }
-        cout<<"/n";
-        if(cursor->is_leaf!=true){ //not leaf
-            for(int i=0;i<cursor->size+1;i++){
-                display(cursor->ptr[i]);
+void BPTree::display(Node *cursor, bool fullTree){
+    // print root node and its first child nodes
+    if(fullTree == false){
+        for (int i = 0;i<cursor->size+1 ; i++){
+                if (i!=cursor->size) {
+                    cout << 0 << " " << cursor->keys[i].value << "\n";
+                }
+                cout << 1 << "\n";
+                for (int j = 0; j<cursor->ptr[i]->size; j++){
+                    cout << cursor->ptr[i]->keys[j].value << " ";
+                }
+                cout << "\n";
+            }
+    }
+    // else, print whole tree
+    else{
+        //check if cursor is not null, print out the value of the key.
+        if(cursor!=NULL){
+            for(int i=0; i<cursor->size;i++){
+                cout <<cursor->keys[i].value<<" ";
+            }
+            cout<<"/n";
+            if(cursor->is_leaf!=true){ //not leaf
+                for(int i=0;i<cursor->size+1;i++){
+                    display(cursor->ptr[i], true);
+                }
             }
         }
-    }
-    else{
-        cout << "No Tree";
+        else{
+            cout << "No Tree";
+        }
     }
 }
 

@@ -115,14 +115,14 @@ int main()
         //Storing the moviewreview object into the physical address      
         memcpy(physicalAddress, &movieReview,sizeof(movieReview));
        
-        tempCount++;
-               //can take out, experiment
-         count++;
-        if (count>60)
-        {
-            physicalAddress = NULL;
-            break;
-        }
+         tempCount++;
+        //        //can take out, experiment
+        //  count++;
+        // if (count>60)
+        // {
+        //     physicalAddress = NULL;
+        //     break;
+        // }
 
     }
    
@@ -172,13 +172,13 @@ int main()
     cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
     cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
     cout << "| 4) Root node and its child node  " << endl;
-    bptree.display(bptree.getRoot());
+    bptree.display(bptree.getRoot(), true);
     cout << "***************************" << endl;
     
     //Experiement 3
     // bptree.search(51);
 
-    bptree.search(15);
+    bptree.search(15, true);
     
 
 
