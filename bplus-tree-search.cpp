@@ -33,7 +33,11 @@ Node* BPTree::search(int key, bool flag, bool rangeflag, int key2){
                             {   
                                 for (int j = 0; j < cursor->size; j++) 
                                 {
-                                    cout << cursor->keys[j].value << " ";
+                                    // if(preholder == 0)
+                                    // {
+                                    //     preholder++;
+                                    //     cout << cursor->keys[j].value << " ";
+                                    // }
                                     // for (int k = 0; k < cursor->keys[j].add_vect.size(); ++j) 
                                     // {
                                     //     if(preholder != cursor->keys[j].value)
@@ -77,7 +81,8 @@ Node* BPTree::search(int key, bool flag, bool rangeflag, int key2){
                             {   
                                 for (int j = 0; j < cursor->size; j++) 
                                 {
-                                    cout << cursor->keys[j].value << " ";
+                                    cout << cursor->keys[j].value << " test ";
+                                    
                                     countingnode++;
                                 }
                             }
