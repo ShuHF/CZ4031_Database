@@ -22,7 +22,7 @@ void BPTree::insert(key_record x)
             Node* parent; // keep track of parent
 
             Node* searchRes;
-            searchRes = search(x.value, false);
+            searchRes = search(x.value, false, false, 0);
             if ( searchRes != nullptr){
                 for(int i = 0; i < searchRes->size; i++)
                 {
