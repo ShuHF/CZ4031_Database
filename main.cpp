@@ -115,6 +115,7 @@ int main()
         //Storing the moviewreview object into the physical address      
         memcpy(physicalAddress, &movieReview,sizeof(movieReview));
        
+<<<<<<< HEAD
          tempCount++;
         //        //can take out, experiment
         //  count++;
@@ -123,6 +124,11 @@ int main()
         //     physicalAddress = NULL;
         //     break;
         // }
+=======
+        tempCount++;
+               //can take out, experiment
+        
+>>>>>>> origin
 
     }
    
@@ -166,6 +172,7 @@ int main()
 
     
 
+<<<<<<< HEAD
     cout << "***************************" << endl;
     cout << "|    B+ Tree               |" << endl;
     cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
@@ -179,7 +186,22 @@ int main()
     // bptree.search(51);
 
     bptree.search(15, true);
+=======
+    // cout << "***************************" << endl;
+    // cout << "|    B+ Tree               |" << endl;
+    // cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
+    // cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
+    // cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
+    // cout << "| 4) Root node and its child node  " << endl;
+    // bptree.display(bptree.getRoot());
+    // cout << "***************************" << endl;
     
+    //Experiement 3 #500 numVote
+    //bptree.search(500, true, false, 0);
+>>>>>>> origin
+    
+    //Experiment 4 between 30,000 to 40,000
+    bptree.search(30000, true, true, 40000);
 
 
 
