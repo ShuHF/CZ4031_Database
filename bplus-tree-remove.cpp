@@ -4,7 +4,7 @@
 #include "bplus-tree.h"
 using namespace std;
 
-void BPTree::remove(int x) {
+void BPTree::remove(key_record x) {
     if (root == NULL) {
         cout << "The tree is empty";
     }
@@ -17,7 +17,7 @@ void BPTree::remove(int x) {
                 parent = cursor;
                 left = i-1;
                 right = i+1;
-                if (x<cursor->keys[i]) {
+                if (x.value<cursor->keys[i].value) {
                     cursor = cursor->ptr[i];
                     break;
                 }
@@ -32,7 +32,7 @@ void BPTree::remove(int x) {
         bool found = false;
         int position;
         for (position = 0; position < cursor->size; position++) {
-            if (cursor->keys[position] == x) {
+            if (cursor->keys[position].value == x.value) {
                 found = true;
                 break;
             }
@@ -129,7 +129,7 @@ void BPTree::remove(int x) {
     }
 }
 
-void BPTree::removeInternal(int key, Node *cursor, Node *child){
+void BPTree::removeInternal(key_record key, Node *cursor, Node *child){
     if(cursor == root){
         if(cursor -> size == 1){
             if(cursor->ptr[1]==child){
@@ -157,7 +157,7 @@ void BPTree::removeInternal(int key, Node *cursor, Node *child){
     //get position of key x
     int position;
     for(position=0;position<cursor->size; position++){
-        if(cursor->keys[position]==key){
+        if(cursor->keys[position].value==key.value){
             break;
         }
     }

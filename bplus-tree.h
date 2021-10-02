@@ -1,29 +1,27 @@
 #ifndef BPLUS-TREE_H_INCLUDED
 #define BPLUS-TREE_H_INCLUDED
 
+struct key_record{
+    float value;
+    vector <void*> add_vect;
+};
+
 // A node in B+ tree
 class Node {
     int size;                   // current number of keys in node
     bool is_leaf;               // whether this node is a leaf node
-    int *keys;                  // pointer to array of keys in the node
+    key_record *keys;                  // pointer to array of keys in the node
     Node** ptr;
     friend class BPTree;
 
 public:
     Node(int maxKeys) // Constructor
     {
-        keys = new int[maxKeys];
+        keys = new key_record[maxKeys];
         ptr = new Node*[maxKeys+1];
         is_leaf = true;
     }
 };
-
-//Node::Node(int maxKeys)
-//{
-//    keys = new float[maxKeys];
-//    ptr = new Node*[maxKeys+1];
-//    is_leaf = true;
-//}
 
 class BPTree
 {
@@ -39,8 +37,8 @@ class BPTree
     //MemoryPool *index;
 
     // Methods
-    void insertInternal(int key, Node *cursor, Node *child);
-    void removeInternal(int key, Node *cursor, Node *child);
+    void insertInternal(key_record key, Node *cursor, Node *child);
+    void removeInternal(key_record key, Node *cursor, Node *child);
     Node *findParent(Node *, Node *);
 
 public:
@@ -49,9 +47,9 @@ public:
         root = NULL; // initialize root to NULL
         maxKeys = (blockSize - 4) / 8;
     }
-    void insert(int);
+    void insert(key_record);
     Node* search(int);
-    void remove(int);
+    void remove(key_record);
     void display(Node *);
     int height(Node *);
     Node *getRoot(){

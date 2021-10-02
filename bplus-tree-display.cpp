@@ -8,7 +8,7 @@ void BPTree::display(Node *cursor){
     //check if cursor is not null, print out the value of the key.
     if(cursor!=NULL){
         for(int i=0; i<cursor->size;i++){
-            cout <<cursor->keys[i]<<" ";
+            cout <<cursor->keys[i].value<<" ";
         }
         cout<<"/n";
         if(cursor->is_leaf!=true){ //not leaf

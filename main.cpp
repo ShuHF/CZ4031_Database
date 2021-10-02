@@ -121,10 +121,10 @@ int main()
         
         //can take out, experiment
         // count++;
-        //   if (count>60){
-        //        physicalAddress = NULL;
-        //         break;
-        //   }
+           if (count>20){
+                physicalAddress = NULL;
+                 break;
+          }
               
 
     }
@@ -151,10 +151,15 @@ int main()
     BPTree bptree = BPTree();
      for (iterator = mappingTable.begin(); iterator != mappingTable.end(); ++iterator) {
         void *blockAddress = get<1>(* iterator);
-        bptree.insert((*(movieRatingReview *) blockAddress).numVote);
-        cout <<to_string((*(movieRatingReview *) blockAddress).numVote);
-        cout << "" << endl;
+        //bptree.insert((*(movieRatingReview *) blockAddress).numVote);
+
+        float numVotes = (*(movieRatingReview *) blockAddress).numVote;
+        key_record record;
+        record.value = numVotes;
+        bptree.insert(record);
     }
+
+    
 
     cout << "***************************" << endl;
     cout << "|    B+ Tree               |" << endl;
@@ -164,6 +169,13 @@ int main()
     cout << "| 4) Root node and its child node  " << endl;
     bptree.display(bptree.getRoot());
     cout << "***************************" << endl;
+
+    bptree.search(15);
+    
+
+
+
+
 
     disk = NULL;
     blkPointer = nullptr;
