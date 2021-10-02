@@ -23,11 +23,7 @@ void BPTree::insert(key_record x)
 
             // search for same numVotes value and if same push back to add_vect
             Node* searchRes;
-<<<<<<< HEAD
-            searchRes = search(x.value, false);
-=======
             searchRes = search(x.value, false, false, 0);
->>>>>>> origin
             if ( searchRes != nullptr){
                 for(int i = 0; i < searchRes->size; i++)
                 {
