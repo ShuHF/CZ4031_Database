@@ -52,7 +52,7 @@ int main()
     string line;
 
     //Read from the data.tsv
-    ifstream filename("C:\\data.tsv");
+    ifstream filename("Data/data.tsv");
     //ignore the header
     filename.ignore(10000,'\n');
 
@@ -116,11 +116,7 @@ int main()
         memcpy(physicalAddress, &movieReview,sizeof(movieReview));
        
         tempCount++;
-               //can take out, experiment
-        // count++;
-        //  if (count>=60)
-        //      break;
-        
+               //can take out, experiment       
 
     }
    
@@ -137,16 +133,16 @@ int main()
         //    }
 
     //Experiment 1/
-    cout << "***************************" << endl;
-    cout << "| After reading Data          |" << endl;
-    cout << "| -------------------         |" << endl;
-    cout << "| 1) Fixed block size: " + to_string(blockSize) + "|" << endl;
-    cout << "| 2) Check Database size: " + to_string(databasesize()) + "|" << endl;
-    cout << "| 3) Num of avaliable block: " + to_string(avaliableBlockleft()) + "|" << endl;
-    cout << "| 4) Number of block used  "+ to_string(numBlockUsed()) +" |" << endl;
-    cout << "***************************" << endl;    
+    // cout << "***************************" << endl;
+    // cout << "| After reading Data          |" << endl;
+    // cout << "| -------------------         |" << endl;
+    // cout << "| 1) Fixed block size: " + to_string(blockSize) + "|" << endl;
+    // cout << "| 2) Check Database size: " + to_string(databasesize()) + "|" << endl;
+    // cout << "| 3) Num of avaliable block: " + to_string(avaliableBlockleft()) + "|" << endl;
+    // cout << "| 4) Number of block used  "+ to_string(numBlockUsed()) +" |" << endl;
+    // cout << "***************************" << endl;    
 
-    cout << "completed" <<endl;
+    // cout << "completed" <<endl;
 
     /*** Experiment 2***/
     //Create Tree
