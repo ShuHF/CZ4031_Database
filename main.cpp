@@ -44,7 +44,8 @@ int main()
     vector <tuple <int, void*>> recordsList;
     vector <tuple <void *, unsigned char>> recordsList_Test;
     vector <void *> test_address;
-    //Storage(500000000,100);
+    //Change block size to the required size 
+    blockSize = 500;
     blkPointer = disk;
 
     //Logical adress with all the physical address of block and offset added
@@ -172,10 +173,10 @@ int main()
     // bptree.search(500, true, false, 0);
     
     //Experiment 4 between 30,000 to 40,000
-    bptree.search(30000, true, true, 40000);
+    //bptree.search(30000, true, true, 40000);
 
 
-    // Experiment 5 (delete numVotes == 1000)
+    //Experiment 5 (delete numVotes == 1000)
     // key_record recordToDelete;
     // recordToDelete.value = 1000;
     // recordToDelete.add_vect.push_back((char *) nullptr );

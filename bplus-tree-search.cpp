@@ -33,28 +33,33 @@ Node* BPTree::search(int key, bool flag, bool rangeflag, int key2){
                             {   
                                 for (int j = 0; j < cursor->size; j++) 
                                 {
-                                    // if(preholder == 0)
-                                    // {
-                                    //     preholder++;
-                                    //     cout << cursor->keys[j].value << " ";
-                                    // }
-                                    // for (int k = 0; k < cursor->keys[j].add_vect.size(); ++j) 
-                                    // {
-                                    //     if(preholder != cursor->keys[j].value)
-                                    //     {
-                                    //         preholder = cursor->keys[j].value;
-                                    //         printonce =0;
-                                    //     }
-                                    //     if(printonce < 1)
-                                    //     {
-                                    //         printf("\n");
-                                    //         printf("In this index node :");
-                                    //         cout << cursor->keys[j].value << " ";
-                                    //         printf("tconst: ");
-                                    //     }
-                                    countingnode++;
-                                    //     printonce++;
-                                    // }
+                                    if(preholder == 0)
+                                    {
+                                        preholder++;
+                                        cout << cursor->keys[j].value << " ";
+                                    }
+                                    for (int k = 0; k < cursor->keys[j].add_vect.size(); ++j) 
+                                    {
+                                        if(loopcounter <=4)
+                                        {       
+                                        if(preholder != cursor->keys[j].value)
+                                        {
+                                            preholder = cursor->keys[j].value;
+                                            printonce =0;
+                                        }
+                                        if(printonce < 1)
+                                        {
+                                            printf("\n");
+                                            printf("In this index node :");
+                                            cout << cursor->keys[j].value << " ";
+                                            printf("tconst: ");
+                                            cout << (*(movieRatingReview *) cursor->keys[j].add_vect[k]).movieName << "\n";
+                                        }
+                                        countingnode++;
+                                         printonce++;
+                                         loopcounter++;
+                                        }
+                                     }
                                     
                                 }
                                 cout << "\n";
@@ -81,7 +86,7 @@ Node* BPTree::search(int key, bool flag, bool rangeflag, int key2){
                             {   
                                 for (int j = 0; j < cursor->size; j++) 
                                 {
-                                    cout << cursor->keys[j].value << " test ";
+                                    //cout << cursor->keys[j].value << " test ";
                                     
                                     countingnode++;
                                 }
@@ -148,6 +153,7 @@ Node* BPTree::search(int key, bool flag, bool rangeflag, int key2){
                 // cout << to_string((avgTotalAvgRating/sumDataBlock)) <<endl;
                 // cout << to_string(sumDataBlock) << endl;
                 // cout << to_string(cursor->keys[i].add_vect.size())<<endl;
+               // cout << (*(movieRatingReview *) cursor->keys[i].add_vect[]).movieName << "\n";
            }
         }
         
