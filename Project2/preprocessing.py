@@ -10,7 +10,7 @@ def connect():
         # read connection parameters
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
-        conn = psycopg2.connect("dbname=Test user=postgres password='root'")
+        conn = psycopg2.connect("dbname=CZ4031 user=postgres password='root'")
 
         # create a cursor
         cur = conn.cursor()
