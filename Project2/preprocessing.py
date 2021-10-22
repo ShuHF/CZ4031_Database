@@ -1,0 +1,1 @@
+#reading the inputs and any preprocessing necessary to make ur alogrith work

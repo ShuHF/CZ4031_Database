@@ -1,0 +1,2 @@
+#MAIN
+print("Hello World")
