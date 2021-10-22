@@ -2,6 +2,8 @@
 
 #connection
 import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
 
 def connect():
     """ Connect to the PostgreSQL database server """
@@ -10,21 +12,26 @@ def connect():
         # read connection parameters
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
-        conn = psycopg2.connect("dbname=CZ4031 user=postgres password='root'")
+        conn = psycopg2.connect("user=postgres password='root'")
+        conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
         # create a cursor
         cur = conn.cursor()
+        cur.execute("SELECT datname FROM pg_database;")
 
-        # execute a statement
-        print('PostgreSQL database version:')
-        cur.execute('SELECT version()')
+        list_database = cur.fetchall()
+        database_name = 'cz4031'
 
-        # display the PostgreSQL database server version
-        db_version = cur.fetchone()
-        print(db_version)
-
+        if (database_name,) not in list_database:
+            sqlCreateDatabase = "create database " + database_name + ";"
+            cur.execute(sqlCreateDatabase)
+            # print("'{}' has been created successfully.".format(database_name))
+        #to be deleted
+        else:
+            print("{} database already exist.".format(database_name))
         # close the communication with the PostgreSQL
         cur.close()
+
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
@@ -32,7 +39,4 @@ def connect():
             conn.close()
             print('Database connection closed.')
 
-
-if __name__ == '__main__':
-    connect()
 
