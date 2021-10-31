@@ -6,7 +6,7 @@ import pandas as pd
 
 from interface import *
 
-
+#Remove last "|" from each line, in testing
 def fileProcessing():
     files = [["csv/customer.csv", "customer.csv" ], ["csv/lineitem.csv","lineitem.csv"], ["csv/nation.csv", "nation.csv"],
              ["csv/orders.csv", "orders.csv"], ["csv/part.csv","part.csv"], ["csv/partsupp.csv","partsupp.csv"],
@@ -24,9 +24,9 @@ def fileProcessing():
         file.close()
 
 if __name__ == "__main__":
-        # gui = interface()
-        # gui.gui()
-        # print("Welcome to CZ4031 database gui")
-        fileProcessing()
+        gui = interface()
+        gui.gui()
+        print("Welcome to CZ4031 database gui")
+        #fileProcessing()
 
 
