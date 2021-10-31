@@ -1,16 +1,32 @@
 
 #MAIN running
 import psycopg2
+import csv
+import pandas as pd
 
-from Project2.preprocessing import connect
-from Project2.interface import *
+from interface import *
+
+
+def fileProcessing():
+    files = [["csv/customer.csv", "customer.csv" ], ["csv/lineitem.csv","lineitem.csv"], ["csv/nation.csv", "nation.csv"],
+             ["csv/orders.csv", "orders.csv"], ["csv/part.csv","part.csv"], ["csv/partsupp.csv","partsupp.csv"],
+             ["csv/region.csv","region.csv"], ["csv/supplier.csv","supplier.csv"]]
+    for filename,output in files:
+        rows = list()
+        file = open(filename, "r")
+        lines = file.read().split("\n")
+
+        for line in lines:
+            rows.append(line[:-1])
+
+        df = pd.DataFrame(rows)
+        df.to_csv("edit/" + output, header=False, index=False)
+        file.close()
 
 if __name__ == "__main__":
-    try:
-        connect()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        gui = interface()
-        gui.gui()
-        print("Welcome to CZ4031 database gui")
+        # gui = interface()
+        # gui.gui()
+        # print("Welcome to CZ4031 database gui")
+        fileProcessing()
+
+

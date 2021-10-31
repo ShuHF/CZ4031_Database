@@ -1,7 +1,7 @@
 #Codes for ui
 import json
 from tkinter import *
-from preprocessing import validation
+from preprocessing import validation, executeQuery
 class interface:
 
     def __init__(self):
@@ -17,6 +17,13 @@ class interface:
             self.panel_2_textarea.configure(state='normal')
             self.panel_2_textarea.delete('1.0', END)
             self.panel_2_textarea.insert(END, error)
+            self.panel_2_textarea.config(fg="Red")
+            self.panel_2_textarea.configure(state='disabled')
+        else:
+            x = executeQuery(text)
+            self.panel_2_textarea.configure(state='normal')
+            self.panel_2_textarea.delete('1.0', END)
+            self.panel_2_textarea.insert(END, x)
             self.panel_2_textarea.config(fg="Red")
             self.panel_2_textarea.configure(state='disabled')
         # #save input
@@ -65,5 +72,7 @@ class interface:
                                 command=self.submitbtn)
         self.submitbtn.place(x=300, y=340)
         self.window.mainloop()
+
+
 
 

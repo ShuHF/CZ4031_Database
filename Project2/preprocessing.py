@@ -2,40 +2,47 @@
 
 #connection
 import psycopg2
+import sqlparse
+import json
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 def connect():
     """ Connect to the PostgreSQL database server """
     conn = None
+    database_name = 'cz4031'
     try:
         # read connection parameters
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
-        conn = psycopg2.connect("user=postgres password='root'")
+        conn = psycopg2.connect(database=database_name, user="postgres", password='root')
         conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
         # create a cursor
         cur = conn.cursor()
-        cur.execute("SELECT datname FROM pg_database;")
-
-        list_database = cur.fetchall()
-        database_name = 'cz4031'
-
-        if (database_name,) not in list_database:
-            sqlCreateDatabase = "create database " + database_name + ";"
-            cur.execute(sqlCreateDatabase)
-            # print("'{}' has been created successfully.".format(database_name))
-        #to be deleted
-        else:
-            print("{} database already exist.".format(database_name))
-        # close the communication with the PostgreSQL
-        cur.close()
-
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
-        if conn is not None:
-            conn.close()
+        return cur
+def validation(text):
+    if not text:
+        return "Empty string"
+    else:
+        sqlstatement = sqlparse.split(text)
+        # if not sqlstatement.is_valid():
+        #     return sqlstatement.errors
+        # else:
+        #     return text
+def executeQuery(text):
+    newStatement = "EXPLAIN (analyze, verbose, costs, format JSON) " + text
+    cursor = connect()
+    cursor.execute(newStatement)
+    explain_query = cursor.fetchall()
+    # open text file
+    with open('output/queryplan.json', 'w') as f:
+        json.dump(explain_query, f, ensure_ascii=False, indent=2)
+    cursor.close()
+    print(explain_query)
+    return explain_query
 
 
