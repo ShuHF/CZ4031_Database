@@ -41,20 +41,15 @@ def main_account_screen():
 
     main_screen.mainloop()
 
-#validate user input upon pressing login
 def validatelogin():
     username1 = username_verify.get()
     password1 = password_verify.get()
     db1 = db_verify.get()
-    username_entry.delete(0, END)
-    password_entry.delete(0, END)
-    db_entry.delete(0, END)
     result = validateconnect(username1, password1, db1)
     if result:
         guiforSQL()
     else:
         login_fail()
-
 
 def login_fail():
     global login_fail_screen
@@ -73,6 +68,22 @@ def delete_main():
 def delete_quiforSQL():
     window.destroy()
 
+def delete_changeprompt():
+    login_change.destroy()
+
+def change_login():
+    global login_change
+    login_change = Toplevel(relogpop)
+    login_change.geometry("200x200")
+    text = NONE
+    if result2:
+        text = "Change!"
+    else:
+        text = "Incorrect"
+    login_change.title(text)
+    Label(login_change, text=text + "!", font=("Courier",14)).pack()
+    Button(login_change, text="OK", width=10, height=1, command=delete_changeprompt).pack()
+
 #Submit function to test if it is empty and also the result
 def submitsql():
     text = panel_1_textarea.get("1.0", "end-1c")
@@ -90,6 +101,45 @@ def submitsql():
         panel_2_textarea.config(fg="Red")
         panel_2_textarea.configure(state='disabled')
 
+def relog():
+    global relogpop
+    relogpop = Toplevel(window)
+    relogpop.geometry("350x300")
+    relogpop.title("Change account")
+    global username_verify2
+    global password_verify2
+    global db_verify2
+
+    username_verify2 = StringVar()
+    password_verify2 = StringVar()
+    db_verify2 = StringVar()
+
+    global username_entry2
+    global password_entry2
+    global db_entry2
+    Label(relogpop, text="Username:", width="300", height="2", font=("Courier", 14)).pack()
+    username_entry2 = Entry(relogpop, textvariable=username_verify2)
+    username_entry2.pack()
+
+    Label(relogpop, text="Password:", width="300", height="2", font=("Courier", 14)).pack()
+    password_entry2 = Entry(relogpop, textvariable=password_verify2, show='*')
+    password_entry2.pack()
+
+    Label(relogpop, text="Database Name:", width="300", height="2", font=("Courier", 14)).pack()
+    db_entry2 = Entry(relogpop, textvariable=db_verify2, show='*')
+    db_entry2.pack()
+
+    Button(relogpop, text="Login", width=10, height=1, command=validatelogin2).pack(pady=10)
+
+#validate user input upon pressing login
+def validatelogin2():
+    username2 = username_verify2.get()
+    password2 = password_verify2.get()
+    db2 = db_verify2.get()
+    global result2
+    result2 = validateconnect(username2, password2, db2)
+    change_login()
+
 
 
 def guiforSQL():
@@ -102,7 +152,7 @@ def guiforSQL():
     window.title("CZ4031")
     # menubar
     menubar = Menu(window)
-    menubar.add_command(label="Setting", command=main_account_screen)
+    menubar.add_command(label="Setting", command=relog)
     menubar.add_command(label="Exit", command=delete_quiforSQL)
     window.config(menu=menubar)
     #Userinput
@@ -134,6 +184,7 @@ def guiforSQL():
     panel_3_label = Label(panel_3, text="Visualize")
     panel_3_label.config(font=("Courier", 14))
     panel_3_label.place(relx=0.0, rely=0.0)
+    window.mainloop()
 
 
 
