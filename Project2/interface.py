@@ -41,6 +41,7 @@ def main_account_screen():
 
     main_screen.mainloop()
 
+#validate the user input in the main login
 def validatelogin():
     username1 = username_verify.get()
     password1 = password_verify.get()
@@ -51,6 +52,7 @@ def validatelogin():
     else:
         login_fail()
 
+#a pop up wil appear if login fail
 def login_fail():
     global login_fail_screen
     login_fail_screen = Toplevel(main_screen)
@@ -59,18 +61,20 @@ def login_fail():
     Label(login_fail_screen, text="Incorrect login credential",font=("Courier", 14)).pack()
     Button(login_fail_screen, text="OK", command=delete_login_fail).pack()
 
+#delete the popup
 def delete_login_fail():
     login_fail_screen.destroy()
-
+#delete the popup
 def delete_main():
     main_screen.destroy()
-
+#delete the popup
 def delete_quiforSQL():
     window.destroy()
-
+#delete the popup
 def delete_changeprompt():
     login_change.destroy()
 
+#create a popup for user changing the connection(success/fail)
 def change_login():
     global login_change
     login_change = Toplevel(relogpop)
@@ -101,6 +105,7 @@ def submitsql():
         panel_2_textarea.config(fg="Red")
         panel_2_textarea.configure(state='disabled')
 
+#the popup for change connection in the middle (same as the main_screen)
 def relog():
     global relogpop
     relogpop = Toplevel(window)
@@ -131,7 +136,7 @@ def relog():
 
     Button(relogpop, text="Login", width=10, height=1, command=validatelogin2).pack(pady=10)
 
-#validate user input upon pressing login
+#validate user input upon pressing setting (change conn in the middle)
 def validatelogin2():
     username2 = username_verify2.get()
     password2 = password_verify2.get()
@@ -141,7 +146,7 @@ def validatelogin2():
     change_login()
 
 
-
+#gui for the main applicaiton
 def guiforSQL():
     delete_main()
     global window
