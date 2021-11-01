@@ -1,78 +1,140 @@
-#Codes for ui
-import json
+import tkinter
 from tkinter import *
-from preprocessing import validation, executeQuery
-class interface:
-
-    def __init__(self):
-        self.window = Tk()
-        self.window.geometry("1030x750")
-        self.window.title("CZ4031")
 
 
-    def submitbtn(self):
-        text = self.panel_1_textarea.get("1.0", "end-1c")
-        error = validation(text)
-        if error:
-            self.panel_2_textarea.configure(state='normal')
-            self.panel_2_textarea.delete('1.0', END)
-            self.panel_2_textarea.insert(END, error)
-            self.panel_2_textarea.config(fg="Red")
-            self.panel_2_textarea.configure(state='disabled')
-        else:
-            x = executeQuery(text)
-            self.panel_2_textarea.configure(state='normal')
-            self.panel_2_textarea.delete('1.0', END)
-            self.panel_2_textarea.insert(END, x)
-            self.panel_2_textarea.config(fg="Red")
-            self.panel_2_textarea.configure(state='disabled')
-        # #save input
-        # text = self.panel_1_textarea.get("1.0", "end-1c")
-        # with open('test.txt', 'w') as file_object:
-        #     file_object.write(text)
-        #
-        # #load input
-        # self.panel_2_textarea.configure(state='normal')
-        # self.panel_2_textarea.delete('1.0', END)
-        # #this suppose to be in json
-        # with open('test.txt', 'r') as file:
-        #     output = file.read()
-        # self.panel_2_textarea.insert(END,output)
-        # self.panel_2_textarea.configure(state='disabled')
-
-    def gui(self):
-        # panel1(Userinput)
-        self.panel_1 = PanedWindow(bd=2, relief=RIDGE, height=350, width=500)
-        self.panel_1.place(x=10, y=20)
-        self.panel_1_label = Label(self.panel_1, text="User input")
-        self.panel_1_label.config(font=("Courier", 14))
-        self.panel_1_textarea = Text(self.panel_1, height=20, width=62)
-        self.panel_1_label.pack()
-        self.panel_1_textarea.pack()
-
-        # panel2(annotated input)
-        self.panel_2 = PanedWindow(bd=2, relief=RIDGE, height=350, width=500)
-        self.panel_2.place(x=10, y=380)
-        self.panel_2_label = Label(self.panel_2, text="Annotated Result")
-        self.panel_2_textarea = Text(self.panel_2, height=20, width=62)
-        self.panel_2_textarea.configure(state='disabled')
-        self.panel_2_label.config(font=("Courier", 14))
-        self.panel_2_label.pack()
-        self.panel_2_textarea.pack()
-
-        # panel3(QEP display)
-        self.panel_3 = PanedWindow(bd=2, relief=RIDGE, height=710, width=500)
-        self.panel_3.place(x=520, y=20)
-        self.panel_3_label = Label(self.panel_3, text="Visualize")
-        self.panel_3_label.config(font=("Courier", 14))
-        self.panel_3_label.place(relx=0.0, rely=0.0)
-
-        # Submit button
-        self.submitbtn = Button(self.window, text="Submit", relief=RIDGE, font=("arial", 12, "bold"), width=20,
-                                command=self.submitbtn)
-        self.submitbtn.place(x=300, y=340)
-        self.window.mainloop()
+# Designing login as main  window
+from Project2.preprocessing import validateconnect, executeQuery
 
 
+#load the login page/first page(main) first)
+def main_account_screen():
+    global main_screen
+    main_screen = Tk()
+    main_screen.geometry("350x300")
+    main_screen.title("Account Login")
+
+    global username_verify
+    global password_verify
+    global db_verify
+
+    username_verify = StringVar()
+    password_verify = StringVar()
+    db_verify = StringVar()
+
+    global username_entry
+    global password_entry
+    global db_entry
+    Label(main_screen, text="CASE SENSITIVE", width="300", height="2", font=("Courier", 14)).pack(padx=2)
+    Label(main_screen, text="Username:", width="300", height="2", font=("Courier", 14)).pack()
+    username_entry = Entry(main_screen, textvariable=username_verify)
+    username_entry.pack()
+
+    Label(main_screen, text="Password:", width="300", height="2", font=("Courier", 14)).pack()
+    password_entry = Entry(main_screen, textvariable=password_verify, show='*')
+    password_entry.pack()
+
+    Label(main_screen, text="Database Name:", width="300", height="2", font=("Courier", 14)).pack()
+    db_entry = Entry(main_screen, textvariable=db_verify, show='*')
+    db_entry.pack()
+
+    Button(main_screen, text="Login", width=10, height=1, command=validatelogin).pack(pady=10)
+
+    main_screen.mainloop()
+
+#validate user input upon pressing login
+def validatelogin():
+    username1 = username_verify.get()
+    password1 = password_verify.get()
+    db1 = db_verify.get()
+    username_entry.delete(0, END)
+    password_entry.delete(0, END)
+    db_entry.delete(0, END)
+    result = validateconnect(username1, password1, db1)
+    if result:
+        guiforSQL()
+    else:
+        login_fail()
 
 
+def login_fail():
+    global login_fail_screen
+    login_fail_screen = Toplevel(main_screen)
+    login_fail_screen.title("Fail")
+    login_fail_screen.geometry("300x100")
+    Label(login_fail_screen, text="Incorrect login credential",font=("Courier", 14)).pack()
+    Button(login_fail_screen, text="OK", command=delete_login_fail).pack()
+
+def delete_login_fail():
+    login_fail_screen.destroy()
+
+def delete_main():
+    main_screen.destroy()
+
+def delete_quiforSQL():
+    window.destroy()
+
+#Submit function to test if it is empty and also the result
+def submitsql():
+    text = panel_1_textarea.get("1.0", "end-1c")
+    if not text:
+        panel_2_textarea.configure(state='normal')
+        panel_2_textarea.delete('1.0', END)
+        panel_2_textarea.insert(END, "Empty String")
+        panel_2_textarea.config(fg="Red")
+        panel_2_textarea.configure(state='disabled')
+    else:
+        x = executeQuery(text)
+        panel_2_textarea.configure(state='normal')
+        panel_2_textarea.delete('1.0', END)
+        panel_2_textarea.insert(END, x)
+        panel_2_textarea.config(fg="Red")
+        panel_2_textarea.configure(state='disabled')
+
+
+
+def guiforSQL():
+    delete_main()
+    global window
+    global panel_1_textarea
+    global panel_2_textarea
+    window = Tk()
+    window.geometry("1030x750")
+    window.title("CZ4031")
+    # menubar
+    menubar = Menu(window)
+    menubar.add_command(label="Setting", command=main_account_screen)
+    menubar.add_command(label="Exit", command=delete_quiforSQL)
+    window.config(menu=menubar)
+    #Userinput
+    panel_1 = PanedWindow(bd=2, relief=RIDGE, height=350, width=500)
+    panel_1.place(x=10, y=20)
+    panel_1_label = Label(panel_1, text="User input")
+    panel_1_label.config(font=("Courier", 14))
+    panel_1_textarea = Text(panel_1, height=20, width=62)
+    panel_1_label.pack()
+    panel_1_textarea.pack()
+    # Submit button
+    submitbtn = Button(window, text="Submit", relief=RIDGE, font=("arial", 12, "bold"), width=20,
+                       command=submitsql)
+    submitbtn.place(x=300, y=340)
+
+    # panel2(annotated input)
+    panel_2 = PanedWindow(bd=2, relief=RIDGE, height=350, width=500)
+    panel_2.place(x=10, y=380)
+    panel_2_label = Label(panel_2, text="Annotated Result")
+    panel_2_textarea = Text(panel_2, height=20, width=62)
+    panel_2_textarea.configure(state='disabled')
+    panel_2_label.config(font=("Courier", 14))
+    panel_2_label.pack()
+    panel_2_textarea.pack()
+
+    # panel3(QEP display)
+    panel_3 = PanedWindow(bd=2, relief=RIDGE, height=710, width=500)
+    panel_3.place(x=520, y=20)
+    panel_3_label = Label(panel_3, text="Visualize")
+    panel_3_label.config(font=("Courier", 14))
+    panel_3_label.place(relx=0.0, rely=0.0)
+
+
+
+main_account_screen()
