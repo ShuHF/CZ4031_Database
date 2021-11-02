@@ -56,7 +56,7 @@ def executeQuery(text):
     cursor.execute(newStatement)
     explain_query = cursor.fetchall()
     # open text file
-    with open('output/queryplan.json', 'w') as f:
+    with open('queryplan.json', 'w') as f:
         json.dump(explain_query, f, ensure_ascii=False, indent=2)
     cursor.close()
     print(explain_query)
