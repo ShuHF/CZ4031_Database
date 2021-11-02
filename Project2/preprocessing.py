@@ -4,6 +4,7 @@
 import psycopg2
 import sqlparse
 import json
+import httpimport
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 def validateconnect(username, password, database_name):
@@ -56,10 +57,14 @@ def executeQuery(text):
     cursor.execute(newStatement)
     explain_query = cursor.fetchall()
     # open text file
-    with open('output/queryplan.json', 'w') as f:
+    with open('queryplan.json', 'w') as f:
         json.dump(explain_query, f, ensure_ascii=False, indent=2)
     cursor.close()
     print(explain_query)
     return explain_query
+
+#def visualizePlan(query_plan):
+    #with httpimport.remote_repo(['package1'], 'http://my-codes.example.com/python_packages'):
+    #import package1
 
 
