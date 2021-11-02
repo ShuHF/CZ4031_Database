@@ -28,21 +28,16 @@ def validateconnect(username, password, database_name):
 def connect():
     """ Connect to the PostgreSQL database server """
     conn = None
-
     f = open('logininfo.json', "r")
     data = json.load(f)
     username = data['username']
     pwd = data['password']
     database_name = data['database']
-    print(username, pwd, database_name)
     try:
         # read connection parameters
-        # connect to the PostgreSQL server
-        print('Connecting to the PostgreSQL database...')
         #username = postgres, pwd = root
         conn = psycopg2.connect(database=database_name, user=username, password=pwd)
         conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-
         # create a cursor
         cur = conn.cursor()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -52,14 +47,22 @@ def connect():
 
 def executeQuery(text):
     newStatement = "EXPLAIN (analyze, verbose, costs, format JSON) " + text
-    cursor = connect()
-    cursor.execute(newStatement)
-    explain_query = cursor.fetchall()
+
+    try:
+        cursor = connect()
+        cursor.execute(newStatement)
+        explain_query = cursor.fetchall()
+        executesuccess = True
+    except(Exception, psycopg2.DatabaseError) as error:
+        explain_query = "Please check your sql statement: \n" + text
+        executesuccess = False
+    finally:
+        cursor.close()
+
     # open text file
     with open('queryplan.json', 'w') as f:
         json.dump(explain_query, f, ensure_ascii=False, indent=2)
-    cursor.close()
-    print(explain_query)
-    return explain_query
+    # print(explain_query)
+    return executesuccess
 
 
