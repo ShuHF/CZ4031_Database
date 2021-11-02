@@ -44,7 +44,8 @@ int main()
     vector <tuple <int, void*>> recordsList;
     vector <tuple <void *, unsigned char>> recordsList_Test;
     vector <void *> test_address;
-    //Storage(500000000,100);
+    //Change block size to the required size 
+    blockSize = 500;
     blkPointer = disk;
 
     //Logical adress with all the physical address of block and offset added
@@ -175,19 +176,19 @@ int main()
     //bptree.search(30000, true, true, 40000);
 
 
-    // Experiment 5 (delete numVotes == 1000)
-    key_record recordToDelete;
-    recordToDelete.value = 1000;
-    recordToDelete.add_vect.push_back((char *) nullptr );
-    bptree.remove(recordToDelete);
+    //Experiment 5 (delete numVotes == 1000)
+    // key_record recordToDelete;
+    // recordToDelete.value = 1000;
+    // recordToDelete.add_vect.push_back((char *) nullptr );
+    // bptree.remove(recordToDelete);
 
-    cout << "        Experiment 5       " << endl;
-    cout << "***************************" << endl;
-    cout << "| 1) Number of times a node is deleted or when two nodes merged: "  << endl; //TODO
-    cout << "| 2) Number of nodes of updated B+ Tree: " + to_string(bptree.getnumNodes()) + "|" << endl;
-    cout << "| 3) Height of updated B+ Tree: " + to_string(bptree.height(bptree.getRoot())) + "|" << endl;
-    cout << "| 4) Content of Root node and its first child nodes of updated B+ Tree: " << endl;
-    //bptree.display(bptree.getRoot(), false);
+    // cout << "        Experiment 5       " << endl;
+    // cout << "***************************" << endl;
+    // cout << "| 1) Number of times a node is deleted or when two nodes merged: "  << endl; //TODO
+    // cout << "| 2) Number of nodes of updated B+ Tree: " + to_string(bptree.getnumNodes()) + "|" << endl;
+    // cout << "| 3) Height of updated B+ Tree: " + to_string(bptree.height(bptree.getRoot())) + "|" << endl;
+    // cout << "| 4) Content of Root node and its first child nodes of updated B+ Tree: " << endl;
+    // bptree.display(bptree.getRoot(), false);
 
 
 
