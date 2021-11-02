@@ -159,18 +159,18 @@ int main()
         bptree.insert(record);
     }
 
-    // cout << "        Experiment 2"        << endl;
-    // cout << "***************************" << endl;
-    // cout << "|    B+ Tree               |" << endl;
-    // cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
-    // cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
-    // cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
-    // cout << "| 4) Root node and its child node  " << endl;
+    cout << "        Experiment 2"        << endl;
+    cout << "***************************" << endl;
+    cout << "|    B+ Tree               |" << endl;
+    cout << "| 1) Parameter n of B+ Tree: " + to_string(bptree.getmaxKeys()) + "|" << endl;
+    cout << "| 2) Number of nodes  "+ to_string(bptree.getnumNodes()) +" |" << endl;
+    cout << "| 3) Height of Tree  "+ to_string(bptree.height(bptree.getRoot())) +" |" << endl;
+    cout << "| 4) Root node and its child node  " << endl;
     //bptree.display(bptree.getRoot(), false); // if false, print only the root and first node
-    // cout << "***************************" << endl;
+    cout << "***************************" << endl;
     
-    // //Experiement 3 #500 numVote
-    // bptree.search(500, true, false, 0);
+    //Experiement 3 #500 numVote
+    //bptree.search(500, true, false, 0);
     
     //Experiment 4 between 30,000 to 40,000
     //bptree.search(30000, true, true, 40000);
