@@ -8,7 +8,7 @@ Node_Descriptions = {
 
 # extract "Node Type" from json file
 def get_node_type():
-    with open('queryplan_select.json') as json_file:
+    with open('.json') as json_file: 
         data = json.loads(json_file)
         type = data["Node Type"]
         print(type)
