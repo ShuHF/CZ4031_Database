@@ -1,0 +1,27 @@
+
+      {
+        "Plan": {
+          "Node Type": "Seq Scan",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Relation Name": "region",
+          "Schema": "public",
+          "Alias": "region",
+          "Startup Cost": 0.0,
+          "Total Cost": 11.7,
+          "Plan Rows": 170,
+          "Plan Width": 430,
+          "Actual Startup Time": 0.014,
+          "Actual Total Time": 0.015,
+          "Actual Rows": 5,
+          "Actual Loops": 1,
+          "Output": [
+            "r_regionkey",
+            "r_name",
+            "r_comment"
+          ]
+        },
+        "Planning Time": 0.795,
+        "Triggers": [],
+        "Execution Time": 0.031
+      }

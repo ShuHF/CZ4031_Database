@@ -1,0 +1,97 @@
+
+      {
+        "Plan": {
+          "Node Type": "Hash Join",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Join Type": "Inner",
+          "Startup Cost": 63570.43,
+          "Total Cost": 329839.79,
+          "Plan Rows": 5882915,
+          "Plan Width": 5,
+          "Actual Startup Time": 750.367,
+          "Actual Total Time": 8540.27,
+          "Actual Rows": 5880814,
+          "Actual Loops": 1,
+          "Output": [
+            "l.l_quantity"
+          ],
+          "Inner Unique": true,
+          "Hash Cond": "(l.l_orderkey = orders.o_orderkey)",
+          "Plans": [
+            {
+              "Node Type": "Seq Scan",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Relation Name": "lineitem",
+              "Schema": "public",
+              "Alias": "l",
+              "Startup Cost": 0.0,
+              "Total Cost": 187514.66,
+              "Plan Rows": 5882915,
+              "Plan Width": 9,
+              "Actual Startup Time": 0.116,
+              "Actual Total Time": 2946.338,
+              "Actual Rows": 5880814,
+              "Actual Loops": 1,
+              "Output": [
+                "l.l_quantity",
+                "l.l_orderkey"
+              ],
+              "Filter": "(l.l_quantity > '1'::numeric)",
+              "Rows Removed by Filter": 120401
+            },
+            {
+              "Node Type": "Hash",
+              "Parent Relationship": "Inner",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 38960.43,
+              "Total Cost": 38960.43,
+              "Plan Rows": 1500000,
+              "Plan Width": 4,
+              "Actual Startup Time": 714.308,
+              "Actual Total Time": 714.31,
+              "Actual Rows": 1500000,
+              "Actual Loops": 1,
+              "Output": [
+                "orders.o_orderkey"
+              ],
+              "Hash Buckets": 131072,
+              "Original Hash Buckets": 131072,
+              "Hash Batches": 32,
+              "Original Hash Batches": 32,
+              "Peak Memory Usage": 2678,
+              "Plans": [
+                {
+                  "Node Type": "Index Only Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Scan Direction": "Forward",
+                  "Index Name": "orders_pkey",
+                  "Relation Name": "orders",
+                  "Schema": "public",
+                  "Alias": "orders",
+                  "Startup Cost": 0.43,
+                  "Total Cost": 38960.43,
+                  "Plan Rows": 1500000,
+                  "Plan Width": 4,
+                  "Actual Startup Time": 0.057,
+                  "Actual Total Time": 261.379,
+                  "Actual Rows": 1500000,
+                  "Actual Loops": 1,
+                  "Output": [
+                    "orders.o_orderkey"
+                  ],
+                  "Heap Fetches": 0
+                }
+              ]
+            }
+          ]
+        },
+        "Planning Time": 18.247,
+        "Triggers": [],
+        "Execution Time": 8814.756
+      }
