@@ -1,3 +1,4 @@
+import json
 import tkinter
 from tkinter import *
 
@@ -99,10 +100,13 @@ def submitsql():
         panel_2_textarea.configure(state='disabled')
     else:
         x = executeQuery(text)
+        f = open('queryplan.json', "r")
+        data = json.load(f)
         panel_2_textarea.configure(state='normal')
         panel_2_textarea.delete('1.0', END)
-        panel_2_textarea.insert(END, x)
-        panel_2_textarea.config(fg="Red")
+        panel_2_textarea.insert(END, data)
+        if not x:
+            panel_2_textarea.config(fg="Red")
         panel_2_textarea.configure(state='disabled')
 
 #the popup for change connection in the middle (same as the main_screen)
