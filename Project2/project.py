@@ -1,11 +1,11 @@
 
 #MAIN running
-import psycopg2
+
 import csv
 from Project2.annotation import get_node_type
 #import pandas as pd
 
-from interface import *
+
 
 #Remove last "|" from each line, in testing
 # def fileProcessing():
@@ -16,18 +16,19 @@ from interface import *
 #         rows = list()
 #         file = open(filename, "r")
 #         lines = file.read().split("\n")
-#
+
 #         for line in lines:
 #             rows.append(line[:-1])
-#
+
 #         df = pd.DataFrame(rows)
 #         df.to_csv("edit/" + output, header=False, index=False)
 #         file.close()
 
+
 if __name__ == "__main__":
-        print("Welcome to CZ4031 database gui")
-        gui = main_account_screen()
-        #fileProcessing()
+         print("Welcome to CZ4031 database gui")
+         gui = main_account_screen()
+         #fileProcessing()
 
 
 
