@@ -4,8 +4,9 @@ from tkinter import *
 
 
 # Designing login as main  window
-from Project2.preprocessing import validateconnect, executeQuery
+from preprocessing import validateconnect, executeQuery
 
+from annotation import *
 
 #load the login page/first page(main) first)
 def main_account_screen():
@@ -98,13 +99,21 @@ def submitsql():
         panel_2_textarea.insert(END, "Empty String")
         panel_2_textarea.config(fg="Red")
         panel_2_textarea.configure(state='disabled')
-    else:
+
+    # Generate annotation based on user query
+    else: 
         x = executeQuery(text)
         f = open('queryplan.json', "r")
         data = json.load(f)
+
+        plan = get_plan()
+        plans = getplanlist(plan)
+        annotated = generate(text, plans)
+
         panel_2_textarea.configure(state='normal')
+        panel_2_textarea.config(fg="Black")
         panel_2_textarea.delete('1.0', END)
-        panel_2_textarea.insert(END, data)
+        panel_2_textarea.insert(END, annotated)
         if not x:
             panel_2_textarea.config(fg="Red")
         panel_2_textarea.configure(state='disabled')
@@ -169,7 +178,7 @@ def guiforSQL():
     panel_1.place(x=10, y=20)
     panel_1_label = Label(panel_1, text="User input")
     panel_1_label.config(font=("Courier", 14))
-    panel_1_textarea = Text(panel_1, height=20, width=62)
+    panel_1_textarea = Text(panel_1, height=20, width=74)
     panel_1_label.pack()
     panel_1_textarea.pack()
     # Submit button
@@ -181,7 +190,7 @@ def guiforSQL():
     panel_2 = PanedWindow(bd=2, relief=RIDGE, height=350, width=500)
     panel_2.place(x=10, y=380)
     panel_2_label = Label(panel_2, text="Annotated Result")
-    panel_2_textarea = Text(panel_2, height=20, width=62)
+    panel_2_textarea = Text(panel_2, height=20, width=74)
     panel_2_textarea.configure(state='disabled')
     panel_2_label.config(font=("Courier", 14))
     panel_2_label.pack()
@@ -189,7 +198,7 @@ def guiforSQL():
 
     # panel3(QEP display)
     panel_3 = PanedWindow(bd=2, relief=RIDGE, height=710, width=500)
-    panel_3.place(x=520, y=20)
+    panel_3.place(x=612, y=20)
     panel_3_label = Label(panel_3, text="Visualize")
     panel_3_label.config(font=("Courier", 14))
     panel_3_label.place(relx=0.0, rely=0.0)
