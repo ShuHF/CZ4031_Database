@@ -1,9 +1,10 @@
 import json
+from typing import Annotated
 
 typelist = []
 
 def get_plan():
-    with open('C:/Users/Xin Yi Loh/OneDrive/Documents/GitHub/CZ4031_Database/queryplan.json') as json_file: 
+    with open('C:/Users/Xin Yi Loh/OneDrive/Documents/GitHub/CZ4031_Database/queryplan_multi.json') as json_file: 
         data = json.load(json_file)
         data = data[0]
         data = data[0]
@@ -16,6 +17,8 @@ def getplanlist(plan):
     for i in typelist:
         if 'Plans' in i:
             i.pop('Plans')
+
+    return typelist
 
 def recursive_calling(plan):
     typelist.append(plan)
