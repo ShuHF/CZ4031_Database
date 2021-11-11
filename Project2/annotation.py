@@ -3,7 +3,7 @@ import json
 import re
 from typing import Annotated
 
-typelist = {}
+typelist = []
 
 fromQuery = ['Seq Scan', 'Index Scan', 'CTE_Scan', 'Bitmap Heap Scan', 'Index Only Scan'];
 
@@ -17,35 +17,19 @@ def get_plan():
     return plan
 
 def getplanlist(plan):
-    list = []
-    dup_plan = plan
-    list.append(dup_plan)
-    check=False
-    checklist = []
-    while check==False:
-        if 'Plans' in plan:
-            if len(plan['Plans'])>1:
-                for i in range(len(plan['Plans'])):
-                    list.append(plan['Plans'][i])
-                    if 'Plans' in plan['Plans'][i]:
-                        checklist.append(i)
-                        #print("checklist = ", checklist)
-                if len(checklist)==1:
-                    plan = plan['Plans'][checklist[0]]
-                else:
-                    # while(len(checklist>0)):
-                    #     for i in range(len()):
-                    plan = plan['Plans'][checklist[i]]
-            else:
-                list.append(plan['Plans'][0])
-                plan = plan['Plans'][0]
-        else:
-            check=True
-    for i in list:
+    recursive_calling(plan)
+    for i in typelist:
         if 'Plans' in i:
             i.pop('Plans')
 
-    return list
+def recursive_calling(plan):
+    typelist.append(plan)
+    for keys in plan:
+         #This will be a child node left.left
+        if keys == "Plans":
+            x = plan[keys]
+            for y in x:
+                recursive_calling(y)
 
 # generate annotations with given Node Descriptions
 def generate(query, plans):
