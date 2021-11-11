@@ -36,7 +36,7 @@ def main_account_screen():
     password_entry.pack()
 
     Label(main_screen, text="Database Name:", width="300", height="2", font=("Courier", 14)).pack()
-    db_entry = Entry(main_screen, textvariable=db_verify, show='*')
+    db_entry = Entry(main_screen, textvariable=db_verify)
     db_entry.pack()
 
     Button(main_screen, text="Login", width=10, height=1, command=validatelogin).pack(pady=10)
@@ -92,7 +92,7 @@ def change_login():
 
 #Submit function to test if it is empty and also the result
 def submitsql():
-    text = panel_1_textarea.get("1.0", "end-1c")
+    text = userinput.get("1.0", "end-1c")
     if not text:
         panel_2_textarea.configure(state='normal')
         panel_2_textarea.delete('1.0', END)
@@ -103,19 +103,18 @@ def submitsql():
     # Generate annotation based on user query
     else: 
         x = executeQuery(text)
-        f = open('queryplan.json', "r")
-        data = json.load(f)
-
-        plan = get_plan()
-        plans = getplanlist(plan)
-        annotated = generate(text, plans)
-
         panel_2_textarea.configure(state='normal')
-        panel_2_textarea.config(fg="Black")
         panel_2_textarea.delete('1.0', END)
-        panel_2_textarea.insert(END, annotated)
         if not x:
             panel_2_textarea.config(fg="Red")
+            panel_2_textarea.insert(END, "Please check your sql statement")
+        else:
+            plan = get_plan()
+            plans = getplanlist(plan)
+            annotated = generate(text, plans)
+            panel_2_textarea.config(fg="Black")
+            panel_2_textarea.insert(END, annotated)
+
         panel_2_textarea.configure(state='disabled')
 
 #the popup for change connection in the middle (same as the main_screen)
@@ -144,7 +143,7 @@ def relog():
     password_entry2.pack()
 
     Label(relogpop, text="Database Name:", width="300", height="2", font=("Courier", 14)).pack()
-    db_entry2 = Entry(relogpop, textvariable=db_verify2, show='*')
+    db_entry2 = Entry(relogpop, textvariable=db_verify2)
     db_entry2.pack()
 
     Button(relogpop, text="Login", width=10, height=1, command=validatelogin2).pack(pady=10)
@@ -163,7 +162,7 @@ def validatelogin2():
 def guiforSQL():
     delete_main()
     global window
-    global panel_1_textarea
+    global userinput
     global panel_2_textarea
     window = Tk()
     window.geometry("1030x750")
@@ -173,35 +172,44 @@ def guiforSQL():
     menubar.add_command(label="Setting", command=relog)
     menubar.add_command(label="Exit", command=delete_quiforSQL)
     window.config(menu=menubar)
-    #Userinput
-    panel_1 = PanedWindow(bd=2, relief=RIDGE, height=350, width=500)
-    panel_1.place(x=10, y=20)
-    panel_1_label = Label(panel_1, text="User input")
-    panel_1_label.config(font=("Courier", 14))
-    panel_1_textarea = Text(panel_1, height=20, width=74)
-    panel_1_label.pack()
-    panel_1_textarea.pack()
-    # Submit button
-    submitbtn = Button(window, text="Submit", relief=RIDGE, font=("arial", 12, "bold"), width=20,
-                       command=submitsql)
-    submitbtn.place(x=300, y=340)
 
-    # panel2(annotated input)
-    panel_2 = PanedWindow(bd=2, relief=RIDGE, height=350, width=500)
-    panel_2.place(x=10, y=380)
-    panel_2_label = Label(panel_2, text="Annotated Result")
-    panel_2_textarea = Text(panel_2, height=20, width=74)
-    panel_2_textarea.configure(state='disabled')
-    panel_2_label.config(font=("Courier", 14))
+
+    #create panel1 for the user input
+    inputpanel = PanedWindow()
+    inputpanel_label = Label(inputpanel, text="User input")
+    inputpanel_label.config(font=("Courier", 14))
+    inputpanel_label.pack(pady=5)
+    inputpanel.pack()
+    #scrollbar
+    scrollbar = Scrollbar(inputpanel)
+    scrollbar.pack(side=RIGHT, fill=Y)
+    #textarea for the user to write their sql statement
+    userinput = Text(inputpanel, height=15, relief='groove', wrap='word', font=('courier',12),yscrollcommand=scrollbar.set)
+    userinput.pack()
+    scrollbar.config(command=userinput.yview)
+
+    #a div/panel to hold the two button which allow it to be side bvy side
+    div = PanedWindow()
+    # call the preprocessing.py to execute the query
+    submitbtn = Button(div, text="Submit", relief=RIDGE, font=("Courier", 12, "bold"), width=20, command=submitsql)
+    submitbtn.pack(side=LEFT, padx=5)
+    #call a webpage to display the QEP
+    qeptreebtn = Button(div, text="Visualize", relief=RIDGE, font=("Courier", 12, "bold"), width=20,command=print("hi"))
+    qeptreebtn.pack()
+    div.pack(pady=10)
+
+    #Panel 2 for annotated
+    panel_2 = PanedWindow()
+    panel_2_label = Label(panel_2, text="Annotated Query", font=("Courier", 14))
     panel_2_label.pack()
+    panel_2.pack()
+    # scrollbar
+    scrollbar2 = Scrollbar(panel_2)
+    scrollbar2.pack(side=RIGHT, fill=Y)
+    # textarea for the user to write their sql statement
+    panel_2_textarea = Text(panel_2, height=15, relief='groove', wrap='word', font=('courier', 12), yscrollcommand=scrollbar2.set)
     panel_2_textarea.pack()
-
-    # panel3(QEP display)
-    panel_3 = PanedWindow(bd=2, relief=RIDGE, height=710, width=500)
-    panel_3.place(x=612, y=20)
-    panel_3_label = Label(panel_3, text="Visualize")
-    panel_3_label.config(font=("Courier", 14))
-    panel_3_label.place(relx=0.0, rely=0.0)
+    scrollbar2.config(command=panel_2_textarea.yview)
     window.mainloop()
 
 
