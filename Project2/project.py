@@ -2,7 +2,6 @@
 #MAIN running
 
 import csv
-from Project2.annotation import get_node_type
 #import pandas as pd
 
 
@@ -27,8 +26,10 @@ from Project2.annotation import get_node_type
 
 if __name__ == "__main__":
          print("Welcome to CZ4031 database gui")
-         gui = main_account_screen()
-         #fileProcessing()
+         from interface import main_account_screen
+         main_account_screen()
+
+
 
 
 
