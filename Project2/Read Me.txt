@@ -12,5 +12,8 @@ Python libraries:
 
 Steps
 1) Ensure that there is the msedgedriver.exe in the zip file
-2) Run the project.py in pycharm 
-3) Accept the creation of a new virtual interpreter
+2) Open the project in Pycharm
+3) Open the requirements.txt to install the required Python libraries
+4) Accept the creation of a new virtual interpreter
+5) Run the project.py in pycharm 
+
