@@ -12,8 +12,8 @@
 
 ## Steps to run project
 1) Ensure that there is the msedgedriver.exe in the zip file
-2) Open the project in Pycharm
-3) Accept the creation of a new virtual interpreter
+2) Open the project in Pycharm 
+3) Accept the creation of a new virtual interpreter as shown below
   * **Note: Please wait a moment for the installation process to complete before running the project.**
 
 ![image](https://user-images.githubusercontent.com/49061096/141414996-aab3ae6e-0c4e-4f24-9843-2faf45ba8ec9.png)
