@@ -93,9 +93,9 @@ def change_login():
 #Submit function to test if it is empty and also the result
 def submitsql():
     text = userinput.get("1.0", "end-1c")
+    panel_2_textarea.configure(state='normal')
+    panel_2_textarea.delete('1.0', END)
     if not text:
-        panel_2_textarea.configure(state='normal')
-        panel_2_textarea.delete('1.0', END)
         panel_2_textarea.insert(END, "Empty String")
         panel_2_textarea.config(fg="Red")
         panel_2_textarea.configure(state='disabled')
@@ -103,19 +103,18 @@ def submitsql():
     # Generate annotation based on user query
     else: 
         x = executeQuery(text)
-        panel_2_textarea.configure(state='normal')
-        panel_2_textarea.delete('1.0', END)
         if not x:
             panel_2_textarea.config(fg="Red")
             panel_2_textarea.insert(END, "Please check your sql statement")
         else:
             plan = get_plan()
             plans = getplanlist(plan)
-            print(plan)
-            print(plans)
+            # print(plan)
+            # print(plans)
             annotated = generate(text, plans)
             panel_2_textarea.config(fg="Black")
             panel_2_textarea.insert(END, annotated)
+            plans.clear()
 
         panel_2_textarea.configure(state='disabled')
 
@@ -160,12 +159,30 @@ def validatelogin2():
     change_login()
 
 
+def viewJson():
+    json_textarea.configure(state='normal')
+    json_textarea.delete('1.0', END)
+    try:
+        with open('queryplan.json', 'r') as fp:
+            data = json.load(fp)
+
+        json_textarea.insert(END, data)
+        json_textarea.config(fg="Black")
+    except IOError:
+        json_textarea.insert(END, "File not found.")
+        json_textarea.config(fg="Red")
+
+    finally:
+        json_textarea.configure(state='disabled')
+
+
 #gui for the main applicaiton
 def guiforSQL():
     delete_main()
     global window
     global userinput
     global panel_2_textarea
+    global json_textarea
     window = Tk()
     window.geometry("1030x750")
     window.title("CZ4031")
@@ -176,7 +193,7 @@ def guiforSQL():
     window.config(menu=menubar)
 
 
-    #create panel1 for the user input
+    # # #create panel1 for the user input
     inputpanel = PanedWindow()
     inputpanel_label = Label(inputpanel, text="User input")
     inputpanel_label.config(font=("Courier", 14))
@@ -186,7 +203,7 @@ def guiforSQL():
     scrollbar = Scrollbar(inputpanel)
     scrollbar.pack(side=RIGHT, fill=Y)
     #textarea for the user to write their sql statement
-    userinput = Text(inputpanel, height=15, relief='groove', wrap='word', font=('courier',12),yscrollcommand=scrollbar.set)
+    userinput = Text(inputpanel,height=10, relief='groove', wrap='word', font=('courier',10),yscrollcommand=scrollbar.set)
     userinput.pack()
     scrollbar.config(command=userinput.yview)
 
@@ -197,7 +214,11 @@ def guiforSQL():
     submitbtn.pack(side=LEFT, padx=5)
     #call a webpage to display the QEP
     qeptreebtn = Button(div, text="Visualize", relief=RIDGE, font=("Courier", 12, "bold"), width=20,command=print("hi"))
-    qeptreebtn.pack()
+    qeptreebtn.pack(side=LEFT, padx=5)
+    #Display the json format
+    jsonbtn = Button(div, text="Json File", relief=RIDGE, font=("Courier", 12, "bold"), width=20,
+                        command=viewJson)
+    jsonbtn.pack()
     div.pack(pady=10)
 
     #Panel 2 for annotated
@@ -209,11 +230,24 @@ def guiforSQL():
     scrollbar2 = Scrollbar(panel_2)
     scrollbar2.pack(side=RIGHT, fill=Y)
     # textarea for the user to write their sql statement
-    panel_2_textarea = Text(panel_2, height=15, relief='groove', wrap='word', font=('courier', 12), yscrollcommand=scrollbar2.set)
+    panel_2_textarea = Text(panel_2, state='disabled',height=10, relief='groove', wrap='word', font=('courier', 10), yscrollcommand=scrollbar2.set)
     panel_2_textarea.pack()
     scrollbar2.config(command=panel_2_textarea.yview)
+
+    # Panel 3 for viewing JSON file
+    json_panel = PanedWindow()
+    json_panel_label = Label(json_panel, text="View JSON QEP", font=("Courier", 14))
+    json_panel_label.pack()
+    json_panel.pack()
+    # scrollbar
+    scrollbar3 = Scrollbar(json_panel)
+    scrollbar3.pack(side=RIGHT, fill=Y)
+    # textarea for the user to write their sql statement
+    json_textarea = Text(json_panel, height=10,state='disabled', relief='groove', wrap='word', font=('courier', 10),
+                            yscrollcommand=scrollbar3.set)
+    json_textarea.pack()
+    scrollbar3.config(command=json_textarea.yview)
     window.mainloop()
 
 
 
-main_account_screen()
