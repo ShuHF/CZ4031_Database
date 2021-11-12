@@ -219,9 +219,8 @@ def guiforSQL():
     # call the preprocessing.py to execute the query
     submitbtn = Button(div, text="Submit", relief=RIDGE, font=("Courier", 12, "bold"), width=20, command=submitsql)
     submitbtn.pack(side=LEFT, padx=5)
+    
     #call a webpage to display the QEP
-
-    qeptreebtn = Button(div, text="Visualize", relief=RIDGE, font=("Courier", 12, "bold"), width=20,command=print("hi"))
     qeptreebtn = Button(div, text="Visualize QEP Tree", relief=RIDGE, font=("Courier", 12, "bold"), width=20,command=viewQEPTree)
     qeptreebtn.pack(side=LEFT, padx=5)
     
