@@ -13,7 +13,14 @@ Python libraries:
 Steps
 1) Ensure that there is the msedgedriver.exe in the zip file
 2) Open the project in Pycharm
-3) Open the requirements.txt to install the required Python libraries
-4) Accept the creation of a new virtual interpreter
+3) Accept the creation of a new virtual interpreter
+4) If Python libraries are not automatically installed after the creation of a virtual interpreter, open the requirements.txt to install the required Python libraries
+  a) A notification bar should be displayed like in the below image.
+     Click on install requirement.
+     
+  b) If the notification bar is not shown, then open Project Settings/Preferences.
+     Go to Editor/Inspections.
+     In the list of the inspections, select Unsatisfied package requirements.
+     Preview the list of the ignored requirements and click the Add icon (Add a package) to add them.
 5) Run the project.py in pycharm 
 
