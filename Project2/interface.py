@@ -111,11 +111,10 @@ def submitsql():
         else:
             plan = get_plan()
             plans = getplanlist(plan)
-            print(plan)
-            print(plans)
             annotated = generate(text, plans)
             panel_2_textarea.config(fg="Black")
             panel_2_textarea.insert(END, annotated)
+            plans.clear()
 
         panel_2_textarea.configure(state='disabled')
 
