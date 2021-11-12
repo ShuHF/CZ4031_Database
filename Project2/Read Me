@@ -8,7 +8,7 @@ Python libraries:
 1)Tkinter
 2)JSON 
 3)Selenium 
-
+4)psycopg2
 
 Steps
 1) Ensure that there is the msedgedriver.exe in the zip file
