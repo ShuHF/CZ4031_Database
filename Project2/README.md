@@ -1,5 +1,5 @@
 ## Requirements:
-1) Python interpreter 3.10
+1) Python **must be 3.10**
 2) Microsoft Edge to view the QEP diagram
 3) Postgres 
 4) An existing postgres username, password and a database
@@ -14,6 +14,7 @@
 1) Ensure that there is the msedgedriver.exe in the zip file
 2) Open the project in Pycharm 
 3) Accept the creation of a new virtual interpreter as shown below
+  * **Note: Ensure the base interpreter must be using 3.10 as shown in the image below.**
   * **Note: Please wait a moment for the installation process to complete before running the project.**
 
 ![image](https://user-images.githubusercontent.com/49061096/141414996-aab3ae6e-0c4e-4f24-9843-2faf45ba8ec9.png)
