@@ -35,4 +35,9 @@
     * More details can be found at: https://www.jetbrains.com/help/pycharm/managing-dependencies.html#revert-ignored
      
 5) Run the project.py in pycharm
-
+6) When the login popup appear enter your username, password, database that you have created in the postgres system
+7) Click on the login button 
+8) Enter your sql query in the input panel (the first textbox)
+9) Click on submit
+10) To view the json file click on json file button
+11) To view the QEP diagram click on Visualize button
