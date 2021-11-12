@@ -78,7 +78,7 @@ def loadjson():
 def createQEPDiagram():
     data = loadjson()
     # Detach webpage to ensure the web browser does not close
-    options = webdriver.EdgeOptions
+    options = webdriver.EdgeOptions()
     options.add_experimental_option("detach", True)
 
     # Open a webpage using Microsoft Edge
