@@ -10,7 +10,7 @@
 3) Selenium 
 4) psycopg2
 
-### Steps
+## Steps to run project
 1) Ensure that there is the msedgedriver.exe in the zip file
 2) Open the project in Pycharm
 3) Accept the creation of a new virtual interpreter
