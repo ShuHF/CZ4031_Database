@@ -1,0 +1,15 @@
+Requirements:
+1) Python interpreter 3.10
+2) Microsoft Edge to view the QEP diagram
+3) Postgres 
+4) An existing postgres username, password and a database
+
+Python libraries:
+1)Tkinter
+2)JSON 
+3)Selenium 
+
+
+Steps
+1) Ensure that there is the msedgedriver.exe in the zip file
+2) Run the project.py 
