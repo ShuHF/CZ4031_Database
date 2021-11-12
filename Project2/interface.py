@@ -1,10 +1,11 @@
 import json
+import threading
 import tkinter
 from tkinter import *
 
 
 # Designing login as main  window
-from preprocessing import validateconnect, executeQuery
+from preprocessing import validateconnect, executeQuery, createQEPDiagram
 
 from annotation import *
 
@@ -175,7 +176,16 @@ def viewJson():
     finally:
         json_textarea.configure(state='disabled')
 
+<<<<<<< Updated upstream
 
+=======
+#function to visualize the QEP json file into a tree structure
+def viewQEPTree():
+    def callback():
+        createQEPDiagram()
+    t = threading.Thread(target=callback)
+    t.start()
+>>>>>>> Stashed changes
 #gui for the main applicaiton
 def guiforSQL():
     delete_main()
@@ -213,7 +223,11 @@ def guiforSQL():
     submitbtn = Button(div, text="Submit", relief=RIDGE, font=("Courier", 12, "bold"), width=20, command=submitsql)
     submitbtn.pack(side=LEFT, padx=5)
     #call a webpage to display the QEP
+<<<<<<< Updated upstream
     qeptreebtn = Button(div, text="Visualize", relief=RIDGE, font=("Courier", 12, "bold"), width=20,command=print("hi"))
+=======
+    qeptreebtn = Button(div, text="Visualize QEP Tree", relief=RIDGE, font=("Courier", 12, "bold"), width=20,command=viewQEPTree)
+>>>>>>> Stashed changes
     qeptreebtn.pack(side=LEFT, padx=5)
     #Display the json format
     jsonbtn = Button(div, text="Json File", relief=RIDGE, font=("Courier", 12, "bold"), width=20,
